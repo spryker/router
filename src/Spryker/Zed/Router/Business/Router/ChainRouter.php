@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\Router;
+namespace Spryker\Zed\Router\Business\Router;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Cmf\Component\Routing\ChainRouter as SymfonyChainRouter;
@@ -13,7 +13,7 @@ use Symfony\Cmf\Component\Routing\ChainRouter as SymfonyChainRouter;
 class ChainRouter extends SymfonyChainRouter
 {
     /**
-     * @param \Spryker\Shared\RouterExtension\Dependency\Plugin\RouterPluginInterface[] $routerPlugins
+     * @param \Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface[] $routerPlugins
      * @param \Psr\Log\LoggerInterface|null $logger
      */
     public function __construct(array $routerPlugins, ?LoggerInterface $logger = null)
@@ -24,7 +24,7 @@ class ChainRouter extends SymfonyChainRouter
     }
 
     /**
-     * @param \Spryker\Shared\RouterExtension\Dependency\Plugin\RouterPluginInterface[] $routerPlugins
+     * @param \Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface[] $routerPlugins
      *
      * @return void
      */

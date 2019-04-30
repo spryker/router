@@ -5,11 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\Router\Resolver;
+namespace Spryker\Zed\Router\Business\Resolver;
 
 use Closure;
 use ReflectionFunction;
 use ReflectionMethod;
+use ReflectionObject;
+use ReflectionParameter;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
@@ -28,8 +30,8 @@ class ArgumentResolver implements ArgumentResolverInterface
 
     public function __construct()
     {
-        $this->supportsVariadic = method_exists('ReflectionParameter', 'isVariadic');
-        $this->supportsScalarTypes = method_exists('ReflectionParameter', 'getType');
+        $this->supportsVariadic = method_exists(ReflectionParameter::class, 'isVariadic');
+        $this->supportsScalarTypes = method_exists(ReflectionParameter::class, 'getType');
     }
 
     /**
