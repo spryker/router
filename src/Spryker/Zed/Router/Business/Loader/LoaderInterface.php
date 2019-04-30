@@ -5,10 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\Router;
+namespace Spryker\Zed\Router\Business\Loader;
 
-use Symfony\Component\Routing\RouterInterface as SymfonyRouterInterface;
+use Symfony\Component\Config\Loader\LoaderInterface as SymfonyLoaderInterface;
 
-interface RouterInterface extends SymfonyRouterInterface
+interface LoaderInterface extends SymfonyLoaderInterface
 {
 }

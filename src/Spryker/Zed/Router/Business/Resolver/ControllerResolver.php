@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\Router\Resolver;
+namespace Spryker\Zed\Router\Business\Resolver;
 
 use Spryker\Service\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +49,10 @@ class ControllerResolver implements ControllerResolverInterface
 
         if (!is_array($controller)) {
             return false;
+        }
+
+        if (is_callable($controller[0])) {
+            return [$controller[0](), $controller[1]];
         }
 
         $instantiatedController = new $controller[0]();

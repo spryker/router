@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Shared\Router\Route;
+namespace Spryker\Zed\Router\Business\Route;
 
 use Symfony\Component\Routing\Route as SymfonyRoute;
 
