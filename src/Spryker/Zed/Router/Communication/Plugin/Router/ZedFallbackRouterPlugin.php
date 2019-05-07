@@ -16,11 +16,11 @@ use Symfony\Component\Routing\RouterInterface;
  * @method \Spryker\Zed\Router\RouterConfig getConfig()
  * @method \Spryker\Zed\Router\Communication\RouterCommunicationFactory getFactory()
  */
-class ZedRouterPlugin extends AbstractPlugin implements RouterPluginInterface
+class ZedFallbackRouterPlugin extends AbstractPlugin implements RouterPluginInterface
 {
     /**
      * Specification:
-     * - Returns a Router which makes use of caching.
+     * - Returns a Router which can be used as fallback, when no other (cached) router was able to match.
      *
      * @api
      *
@@ -28,6 +28,6 @@ class ZedRouterPlugin extends AbstractPlugin implements RouterPluginInterface
      */
     public function getRouter(): RouterInterface
     {
-        return $this->getFacade()->getZedRouter();
+        return $this->getFacade()->getZedFallbackRouter();
     }
 }
