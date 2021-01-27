@@ -99,7 +99,7 @@ class RouterConfig extends AbstractBundleConfig
             );
         }
 
-        return array_filter($controllerDirectories, 'glob');
+        return $this->filterDirectories($controllerDirectories);
     }
 
     /**
