@@ -118,7 +118,7 @@ class RouterConfig extends AbstractBundleConfig
     }
 
     /**
-     * @param array $directories
+     * @param string[] $directories
      *
      * @return array
      */
