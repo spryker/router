@@ -125,7 +125,7 @@ class RouterConfig extends AbstractBundleConfig
     protected function filterDirectories(array $directories): array
     {
         return array_filter($directories, 'glob');
-    }	    }
+    }
 
     /**
      * Specification:
