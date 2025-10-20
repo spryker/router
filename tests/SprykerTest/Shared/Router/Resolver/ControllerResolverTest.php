@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Shared\Router\Communication\Resolver;
+namespace SprykerTest\Shared\Router\Resolver;
 
 use Codeception\Test\Unit;
 use InvalidArgumentException;
@@ -16,7 +16,6 @@ use InvalidArgumentException;
  * @group SprykerTest
  * @group Shared
  * @group Router
- * @group Communication
  * @group Resolver
  * @group ControllerResolverTest
  * Add your own group annotations below this line

@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignoreFile
 
 /**
  * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.

@@ -5,16 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Router\tests\SprykerTest\Zed\Router\Communication\Resolver;
+namespace SprykerTest\Zed\Router\Communication\Resolver;
 
 use Codeception\Test\Unit;
 
 /**
  * Auto-generated group annotations
  *
- * @group Spryker
- * @group Router
- * @group tests
  * @group SprykerTest
  * @group Zed
  * @group Router

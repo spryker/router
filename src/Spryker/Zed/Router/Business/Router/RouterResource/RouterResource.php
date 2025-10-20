@@ -137,9 +137,9 @@ class RouterResource implements ResourceInterface
      */
     protected function getClassNameFromFile(SplFileInfo $fileInfo): string
     {
-        $classNameParts = explode(DIRECTORY_SEPARATOR, $fileInfo->getPathname());
-        $srcPosition = array_search('src', $classNameParts);
-        $className = implode('\\', array_slice($classNameParts, $srcPosition + 1));
+        $classNameSrcPart = explode('src', $fileInfo->getPathname());
+        $classNameParts = explode(DIRECTORY_SEPARATOR, trim(end($classNameSrcPart), DIRECTORY_SEPARATOR));
+        $className = implode('\\', $classNameParts);
         $className = str_replace(['.php', '\\\\'], ['', '\\'], $className);
 
         return $className;
