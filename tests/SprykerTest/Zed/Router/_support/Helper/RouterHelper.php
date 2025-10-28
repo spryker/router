@@ -114,7 +114,7 @@ class RouterHelper extends Module
     protected function getRouterPlugin(): RouterPluginInterface
     {
         if (static::$routerPlugin === null) {
-            $controllerDirectories = sprintf('%s/spryker/spryker/Bundles/*/src/Spryker/Zed/*/Communication/Controller/', APPLICATION_VENDOR_DIR);
+            $controllerDirectories = sprintf('%s/Spryker/*/src/Spryker/Zed/*/Communication/Controller/', APPLICATION_SOURCE_DIR);
             $this->getConfigHelper()->mockConfigMethod('getControllerDirectories', [$controllerDirectories], static::MODULE_NAME);
             $routerFacade = $this->getBusinessHelper()->getFacade(static::MODULE_NAME);
             $routerPlugin = new ZedRouterPlugin();
