@@ -182,10 +182,8 @@ abstract class AbstractRouterResource implements ResourceInterface
     {
         $bundleControllerAction = new BundleControllerAction($module, $controller, $action);
         $controllerResolver = new ControllerResolver();
-        /** @var \Spryker\Zed\Kernel\Communication\Controller\AbstractController $controller */
-        $controller = $controllerResolver->resolve($bundleControllerAction);
 
-        return get_class($controller);
+        return $controllerResolver->getResolvedClassName($bundleControllerAction);
     }
 
     /**

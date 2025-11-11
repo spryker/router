@@ -7,7 +7,9 @@
 
 namespace Spryker\Shared\Router\Resolver;
 
+use Closure;
 use InvalidArgumentException;
+use Spryker\Service\Container\ContainerDelegator;
 use Spryker\Service\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
@@ -63,8 +65,16 @@ class ControllerResolver implements ControllerResolverInterface
      */
     protected function getControllerFromString(Request $request, string $controller)
     {
-        if (strpos($controller, ':') === false) {
+        if (strpos($controller, ':') === false && strpos($controller, '.') === false) {
             return false;
+        }
+
+        $globalContainer = ContainerDelegator::getInstance();
+
+        // Check for Symfony Bundle Controller
+        if ($globalContainer->has($controller)) {
+            /** @phpstan-var callable */
+            return $globalContainer->get($controller);
         }
 
         [$controllerServiceIdentifier, $actionName] = explode(':', $controller);
@@ -79,6 +89,16 @@ class ControllerResolver implements ControllerResolverInterface
             return $callable;
         }
 
+        if (!$this->container->has('container')) {
+            return false;
+        }
+
+        $container = $this->container->get('container');
+
+        if ($container->has($controllerServiceIdentifier)) {
+            return $container->get($controllerServiceIdentifier);
+        }
+
         return false;
     }
 
@@ -90,23 +110,35 @@ class ControllerResolver implements ControllerResolverInterface
      */
     protected function getControllerFromArray(Request $request, array $controller)
     {
+        /** @var \Spryker\Service\Container\ContainerDelegator|null $container */
+        $container = $this->container->has(ContainerDelegator::class) ? $this->container->get(ContainerDelegator::class) : null;
+
+        if ($controller[0] instanceof Closure) {
+            $controllerInstance = $controller[0]();
+            $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
+
+            /** @phpstan-var callable */
+            return [$controllerInstance, $controller[1]];
+        }
+
+        if ($container && is_string($controller[0]) && $container->has($controller[0])) {
+            /** @phpstan-var callable */
+            return [$container->get($controller[0]), $controller[1]];
+        }
+
         if (is_callable($controller[0])) {
             $controllerInstance = $controller[0]();
             $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
 
-            /** @phpstan-var callable $callable*/
-            $callable = [$controllerInstance, $controller[1]];
-
-            return $callable;
+            /** @phpstan-var callable */
+            return [$controllerInstance, $controller[1]];
         }
 
         $controllerInstance = new $controller[0]();
         $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
 
-        /** @phpstan-var callable $callable*/
-        $callable = [$controllerInstance, $controller[1]];
-
-        return $callable;
+        /** @phpstan-var callable */
+        return [$controllerInstance, $controller[1]];
     }
 
     /**
