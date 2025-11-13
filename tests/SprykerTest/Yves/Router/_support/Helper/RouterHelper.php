@@ -89,9 +89,6 @@ class RouterHelper extends Module
         $this->getContainer()->set(static::SERVICE_ROUTER, $chainRouter);
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     protected function getRouteCollection(): RouteCollection
     {
         if ($this->routeCollection === null) {
@@ -101,9 +98,6 @@ class RouterHelper extends Module
         return $this->routeCollection;
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         /** @var \Spryker\Service\Container\ContainerInterface $container */
@@ -112,11 +106,6 @@ class RouterHelper extends Module
         return $container;
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         $this->routeCollection = null;

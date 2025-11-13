@@ -14,6 +14,7 @@ use Spryker\Service\Container\ContainerInterface;
 use Spryker\Zed\Router\Business\Loader\ClosureLoader;
 use Spryker\Zed\Router\Business\Route\Route;
 use Spryker\Zed\Router\Business\Route\RouteCollection;
+use Spryker\Zed\Router\Business\Router\ChainRouter;
 use Spryker\Zed\Router\Business\Router\Router;
 use Spryker\Zed\Router\Business\RouterFacadeInterface;
 use Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin;
@@ -45,50 +46,40 @@ class RouterHelper extends Module
     use ModuleHelperConfigTrait;
 
     /**
-     * @var string
+     * @uses \Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
      */
-    protected const MODULE_NAME = 'Router';
+    protected const string SERVICE_ROUTER = 'routers';
 
-    /**
-     * @var string
-     */
-    protected const CONFIG_KEY_ROUTER_PLUGINS = 'routerPlugins';
+    protected const string MODULE_NAME = 'Router';
+
+    protected const string CONFIG_KEY_ROUTER_PLUGINS = 'routerPlugins';
 
     /**
      * @var array<\Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface>
      */
-    protected $routerPlugins = [];
+    protected array $routerPlugins = [];
+
+    protected ?RouteCollection $routeCollection = null;
+
+    protected static ?ZedRouterPlugin $routerPlugin = null;
 
     /**
-     * @uses \Spryker\Zed\Router\Communication\Plugin\Application\RouterApplicationPlugin::SERVICE_ROUTER
-     *
-     * @var string
-     */
-    protected const SERVICE_ROUTER = 'routers';
-
-    /**
-     * @var \Spryker\Zed\Router\Business\Route\RouteCollection|null
-     */
-    protected $routeCollection;
-
-    /**
-     * @var \Spryker\Zed\Router\Communication\Plugin\Router\ZedRouterPlugin|null
-     */
-    protected static $routerPlugin;
-
-    /**
-     * @return void
+     * This method is called once from Codeception before any test runs.
+     * It will not be called between tests.
      */
     public function _initialize(): void
     {
+        // When Routers are configured via codeception.yml configuration, those will be added here.
         foreach ($this->config[static::CONFIG_KEY_ROUTER_PLUGINS] as $routerPlugin) {
             $this->routerPlugins[$routerPlugin] = new $routerPlugin();
         }
 
+        // When there is no default router provided, we will add it here.
         if (!isset($this->routerPlugins[ZedRouterPlugin::class])) {
             $this->routerPlugins[ZedRouterPlugin::class] = $this->getRouterPlugin();
         }
 
+        // Setting up the request to be able to set the SERVER_NAME which is used in tests.
         $requestFactory = function (array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null) {
             $request = new Request($query, $request, $attributes, $cookies, $files, $server, $content);
             $request->server->set('SERVER_NAME', 'localhost');
@@ -98,9 +89,18 @@ class RouterHelper extends Module
         Request::setFactory($requestFactory);
     }
 
-    /**
-     * @return void
-     */
+    public function _before(TestInterface $test): void
+    {
+        parent::_before($test);
+
+        $this->addDependencies();
+        $this->getEventDispatcherHelper()->addEventDispatcherPlugin(new RouterListenerEventDispatcherPlugin());
+
+        $this->getApplicationHelper()->addApplicationPlugin(
+            $this->getRouterApplicationPluginStub(),
+        );
+    }
+
     protected function setDefaultConfig(): void
     {
         $this->config = [
@@ -109,7 +109,7 @@ class RouterHelper extends Module
     }
 
     /**
-     * @return \Spryker\Zed\RouterExtension\Dependency\Plugin\RouterPluginInterface
+     * This only needs to be set up once as this is a heavy process and will not change between tests.
      */
     protected function getRouterPlugin(): RouterPluginInterface
     {
@@ -157,8 +157,7 @@ class RouterHelper extends Module
 
         $this->getRouteCollection()->add($name, $route, 0);
 
-        /** @var \Spryker\Zed\Router\Business\Router\ChainRouter $chainRouter */
-        $chainRouter = $this->getContainer()->get(static::SERVICE_ROUTER);
+        $chainRouter = new ChainRouter([]);
 
         $loader = new ClosureLoader();
         $resource = function () {
@@ -166,23 +165,8 @@ class RouterHelper extends Module
         };
         $router = new Router($loader, $resource, $this->getConfig(), []);
         $chainRouter->add($router);
-    }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
-    public function _before(TestInterface $test): void
-    {
-        parent::_before($test);
-
-        $this->addDependencies();
-        $this->getEventDispatcherHelper()->addEventDispatcherPlugin(new RouterListenerEventDispatcherPlugin());
-
-        $this->getApplicationHelper()->addApplicationPlugin(
-            $this->getRouterApplicationPluginStub(),
-        );
+        $this->getContainer()->set(static::SERVICE_ROUTER, $chainRouter);
     }
 
     /**
@@ -284,13 +268,8 @@ class RouterHelper extends Module
         return $container;
     }
 
-    /**
-     * @return void
-     */
-    public function _afterSuite()
+    public function _after(TestInterface $test): void
     {
-        parent::_afterSuite();
-
         $this->routeCollection = null;
     }
 }
