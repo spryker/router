@@ -47,7 +47,7 @@ abstract class AbstractCacheWarmer implements CacheInterface
     public function warmUp(): void
     {
         $this->removeDir($this->getCacheDir());
-        $this->router->warmUp('');
+        $this->router->warmUp($this->getCacheDir() ?? '');
     }
 
     /**
