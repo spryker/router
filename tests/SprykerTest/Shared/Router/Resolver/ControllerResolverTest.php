@@ -181,4 +181,116 @@ class ControllerResolverTest extends Unit
         // Assert
         $this->tester->assertSetApplicationAndInitializeCalledOnController();
     }
+
+    /**
+     * @return void
+     */
+    public function testGetControllerInjectsAndInitializesWhenLoadedFromGlobalContainer(): void
+    {
+        // Arrange
+        $request = $this->tester->getRequestWithControllerInGlobalContainer();
+        $resolver = $this->tester->getControllerResolverWithGlobalContainer();
+
+        // Act
+        $resolver->getController($request);
+
+        // Assert
+        $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetControllerInjectsAndInitializesWhenLoadedFromNestedContainer(): void
+    {
+        // Arrange
+        $request = $this->tester->getRequestWithControllerInNestedContainer();
+        $resolver = $this->tester->getControllerResolverWithNestedContainer();
+
+        // Act
+        $resolver->getController($request);
+
+        // Assert
+        $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetControllerInjectsAndInitializesWhenLoadedFromContainerDelegatorInArray(): void
+    {
+        // Arrange
+        $request = $this->tester->getRequestWithControllerArrayFromDelegator();
+        $resolver = $this->tester->getControllerResolverWithDelegatorService();
+
+        // Act
+        $resolver->getController($request);
+
+        // Assert
+        $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetControllerInjectsAndInitializesWhenLoadedFromServiceIdentifier(): void
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        // Arrange
+        $request = $this->tester->getRequestWithControllerService();
+        $services = ['ControllerServiceName' => $this->tester->getInitializableTestControllerNamespace()];
+        $resolver = $this->tester->getControllerResolver($services);
+
+        // Act
+        $resolver->getController($request);
+
+        // Assert
+        $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetControllerInjectsAndInitializesWhenControllerIsClosureInArray(): void
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        // Arrange
+        $request = $this->tester->getRequest();
+        $request->attributes->set('_controller', [
+            function () {
+                $controllerClass = $this->tester->getInitializableTestControllerNamespace();
+
+                return new $controllerClass();
+            },
+            'mockAction',
+        ]);
+        $resolver = $this->tester->getControllerResolver();
+
+        // Act
+        $resolver->getController($request);
+
+        // Assert
+        $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetControllerInjectsAndInitializesWhenControllerIsInstantiatedDirectly(): void
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        // Arrange
+        $request = $this->tester->getRequest();
+        $request->attributes->set('_controller', [$this->tester->getInitializableTestControllerNamespace(), 'mockAction']);
+        $resolver = $this->tester->getControllerResolver();
+
+        // Act
+        $resolver->getController($request);
+
+        // Assert
+        $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
+    }
 }

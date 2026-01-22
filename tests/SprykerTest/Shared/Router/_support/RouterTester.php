@@ -9,6 +9,7 @@ namespace SprykerTest\Shared\Router;
 
 use Codeception\Actor;
 use Spryker\Service\Container\Container;
+use Spryker\Service\Container\ContainerDelegator;
 use Spryker\Service\Container\ContainerInterface;
 use Spryker\Shared\Router\Resolver\ControllerResolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -266,5 +267,113 @@ class RouterTester extends Actor
     {
         $this->assertTrue(isset($this->calledControllerMethods['setApplication']));
         $this->assertTrue(isset($this->calledControllerMethods['initialize']));
+    }
+
+    /**
+     * @return string
+     */
+    public function getInitializableTestControllerNamespace(): string
+    {
+        return 'Spryker\Zed\Router\Communication\Controller\InitializableTestController';
+    }
+
+    /**
+     * @return void
+     */
+    public function assertSetApplicationAndInitializeCalledOnTestController(): void
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        $controllerClass = $this->getInitializableTestControllerNamespace();
+
+        $this->assertTrue(isset($controllerClass::$calledMethods['setApplication']));
+        $this->assertTrue(isset($controllerClass::$calledMethods['initialize']));
+
+        $controllerClass::resetCalledMethods();
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    public function getRequestWithControllerInGlobalContainer(): Request
+    {
+        $request = $this->getRequest();
+
+        $request->attributes->set('_controller', 'GlobalController.ServiceName');
+
+        return $request;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+     */
+    public function getControllerResolverWithGlobalContainer(): ControllerResolverInterface
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        $controllerClass = $this->getInitializableTestControllerNamespace();
+        $controllerInstance = new $controllerClass();
+
+        $globalContainer = ContainerDelegator::getInstance();
+        $globalContainer->set('GlobalController.ServiceName', $controllerInstance);
+
+        return new ControllerResolver(new Container());
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    public function getRequestWithControllerInNestedContainer(): Request
+    {
+        $request = $this->getRequest();
+
+        $request->attributes->set('_controller', 'NestedControllerServiceName:mockAction');
+
+        return $request;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+     */
+    public function getControllerResolverWithNestedContainer(): ControllerResolverInterface
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        $controllerClass = $this->getInitializableTestControllerNamespace();
+
+        $nestedContainer = new Container(['NestedControllerServiceName' => $controllerClass]);
+        $containerWrapper = new Container(['container' => $nestedContainer]);
+
+        return new ControllerResolver($containerWrapper);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    public function getRequestWithControllerArrayFromDelegator(): Request
+    {
+        $request = $this->getRequest();
+
+        $request->attributes->set('_controller', ['DelegatorControllerServiceName', 'mockAction']);
+
+        return $request;
+    }
+
+    /**
+     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+     */
+    public function getControllerResolverWithDelegatorService(): ControllerResolverInterface
+    {
+        require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
+
+        $controllerClass = $this->getInitializableTestControllerNamespace();
+        $controllerInstance = new $controllerClass();
+
+        $delegator = ContainerDelegator::getInstance();
+        $delegator->set('DelegatorControllerServiceName', $controllerInstance);
+
+        $container = new Container([ContainerDelegator::class => $delegator]);
+
+        return new ControllerResolver($container);
     }
 }

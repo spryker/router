@@ -62,8 +62,8 @@ class BackofficeRouterResourceTest extends Unit
     protected function getGetFinderDataProvider(): array
     {
         return [
-            'Should not filter out files when all directories are allowed.' => [[], 1],
-            'Should not filter out files when a directory does not exist.' => [['Mock'], 1],
+            'Should not filter out files when all directories are allowed.' => [[], 2],
+            'Should not filter out files when a directory does not exist.' => [['Mock'], 2],
             'Should filter out files when a directory does not exist.' => [['Fixtures'], 0],
         ];
     }

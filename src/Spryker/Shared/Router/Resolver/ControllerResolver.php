@@ -73,20 +73,23 @@ class ControllerResolver implements ControllerResolverInterface
 
         // Check for Symfony Bundle Controller
         if ($globalContainer->has($controller)) {
+            /** @phpstan-var object $controllerInstance */
+            $controllerInstance = $globalContainer->get($controller);
+            $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
+
             /** @phpstan-var callable */
-            return $globalContainer->get($controller);
+            return $controllerInstance;
         }
 
         [$controllerServiceIdentifier, $actionName] = explode(':', $controller);
+
         if ($this->container->has($controllerServiceIdentifier)) {
-            $controllerNameSpace = $this->container->get($controllerServiceIdentifier);
-            $controllerInstance = new $controllerNameSpace();
+            $controllerClassName = $this->container->get($controllerServiceIdentifier);
+            $controllerInstance = new $controllerClassName();
             $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
 
-            /** @phpstan-var callable $callable*/
-            $callable = [$controllerInstance, $actionName];
-
-            return $callable;
+            /** @phpstan-var callable */
+            return [$controllerInstance, $actionName];
         }
 
         if (!$this->container->has('container')) {
@@ -96,7 +99,18 @@ class ControllerResolver implements ControllerResolverInterface
         $container = $this->container->get('container');
 
         if ($container->has($controllerServiceIdentifier)) {
-            return $container->get($controllerServiceIdentifier);
+            $controllerClassName = $container->get($controllerServiceIdentifier);
+
+            $controllerInstance = $controllerClassName;
+
+            if (is_string($controllerClassName)) {
+                $controllerInstance = new $controllerClassName();
+            }
+
+            $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
+
+            /** @phpstan-var callable */
+            return [$controllerInstance, $actionName];
         }
 
         return false;
@@ -122,8 +136,12 @@ class ControllerResolver implements ControllerResolverInterface
         }
 
         if ($container && is_string($controller[0]) && $container->has($controller[0])) {
+            /** @phpstan-var object $controllerInstance */
+            $controllerInstance = $container->get($controller[0]);
+            $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
+
             /** @phpstan-var callable */
-            return [$container->get($controller[0]), $controller[1]];
+            return [$controllerInstance, $controller[1]];
         }
 
         if (is_callable($controller[0])) {
@@ -152,8 +170,7 @@ class ControllerResolver implements ControllerResolverInterface
     protected function getControllerFromObject(Request $request, $controller)
     {
         if (method_exists($controller, '__invoke')) {
-
-            /** @phpstan-var callable $controller*/
+            /** @phpstan-var callable $controller */
             $controller = $this->injectContainerAndInitialize($controller);
 
             return $controller;
