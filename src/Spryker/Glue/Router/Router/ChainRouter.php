@@ -36,6 +36,7 @@ class ChainRouter extends SymfonyChainRouter
     protected function addRouterPlugins(array $routerPlugins): void
     {
         foreach ($routerPlugins as $routerPlugin) {
+            // @phpstan-ignore instanceof.alwaysTrue (defensive programming for type safety)
             if ($routerPlugin instanceof RouterPluginInterface) {
                 $routerPlugin = $routerPlugin->getRouter();
             }
