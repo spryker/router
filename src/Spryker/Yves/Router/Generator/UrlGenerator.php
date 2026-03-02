@@ -52,9 +52,6 @@ class UrlGenerator extends CompiledUrlGenerator implements RouterEnhancerAwareIn
         return $generatedUrl;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function getRequest(): Request
     {
         if ($this->request === null) {

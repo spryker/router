@@ -17,9 +17,6 @@ class RouteCollection extends SymfonyRouteCollection
      */
     protected $routeManipulator;
 
-    /**
-     * @param array $routeManipulator
-     */
     public function __construct(array $routeManipulator = [])
     {
         $this->routeManipulator = $routeManipulator;

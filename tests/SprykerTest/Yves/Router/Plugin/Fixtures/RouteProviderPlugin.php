@@ -13,11 +13,6 @@ use Spryker\Yves\Router\Route\RouteCollection;
 
 class RouteProviderPlugin extends AbstractRouteProviderPlugin
 {
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     public function addRoutes(RouteCollection $routeCollection): RouteCollection
     {
         $route = $this->buildRoute('/foo', 'Router', 'Router');
@@ -32,15 +27,6 @@ class RouteProviderPlugin extends AbstractRouteProviderPlugin
         return $routeCollection;
     }
 
-    /**
-     * @param string $path
-     * @param string $moduleName
-     * @param string $controllerName
-     * @param string $actionName
-     * @param bool $parseJsonBody
-     *
-     * @return \Spryker\Yves\Router\Route\Route
-     */
     protected function buildRoute(
         string $path,
         string $moduleName,

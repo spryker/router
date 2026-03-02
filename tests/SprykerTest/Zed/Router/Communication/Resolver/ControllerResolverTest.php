@@ -27,9 +27,6 @@ class ControllerResolverTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsAnArrayWhenControllerIsAnUrl(): void
     {
         // Arrange
@@ -43,9 +40,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertController($this->tester->getMockControllerNamespace(), $controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsAnArrayWhenControllerIsAService(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/MockController.php');

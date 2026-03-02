@@ -55,9 +55,6 @@ class RouterConfig extends AbstractBundleConfig
         return $routerConfiguration;
     }
 
-    /**
-     * @return string|null
-     */
     protected function getCachePathIfCacheEnabled(): ?string
     {
         if ($this->get(RouterConstants::YVES_IS_CACHE_ENABLED, true)) {

@@ -14,13 +14,6 @@ use Symfony\Component\Routing\RequestContext;
  */
 class QueryStringRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
 {
-    /**
-     * @param string $url
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     * @param int $referenceType
-     *
-     * @return string
-     */
     public function afterGenerate(string $url, RequestContext $requestContext, int $referenceType): string
     {
         $queryParams = $this->getQueryString($requestContext);
@@ -32,11 +25,6 @@ class QueryStringRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $url;
     }
 
-    /**
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return string|null
-     */
     protected function getQueryString(RequestContext $requestContext): ?string
     {
         return $requestContext->getQueryString();

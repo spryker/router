@@ -42,9 +42,6 @@ class RouterFactory extends AbstractFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_ROUTER);
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
-     */
     public function createArgumentResolver(): ArgumentResolverInterface
     {
         return new ArgumentResolver(
@@ -53,9 +50,6 @@ class RouterFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface
-     */
     public function createArgumentMetaDataFactory(): ArgumentMetadataFactoryInterface
     {
         return new ArgumentMetadataFactory();
@@ -76,49 +70,31 @@ class RouterFactory extends AbstractFactory
         ];
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createRequestAttributeValueResolver(): ArgumentValueResolverInterface
     {
         return new RequestAttributeValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createRequestRequestValueResolver(): ArgumentValueResolverInterface
     {
         return new RequestRequestValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createRequestValueResolver(): ArgumentValueResolverInterface
     {
         return new RequestValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createSessionValueResolver(): ArgumentValueResolverInterface
     {
         return new SessionValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createDefaultValueResolver(): ArgumentValueResolverInterface
     {
         return new DefaultValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createVariadicValueResolver(): ArgumentValueResolverInterface
     {
         return new VariadicValueResolver();

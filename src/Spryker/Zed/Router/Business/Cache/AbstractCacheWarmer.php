@@ -29,11 +29,6 @@ abstract class AbstractCacheWarmer implements CacheInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Zed\Router\Business\Router\ChainRouter $router
-     * @param \Symfony\Component\Filesystem\Filesystem $fileSystem
-     * @param \Spryker\Zed\Router\RouterConfig $config
-     */
     public function __construct(ChainRouter $router, Filesystem $fileSystem, RouterConfig $config)
     {
         $this->router = $router;
@@ -41,20 +36,12 @@ abstract class AbstractCacheWarmer implements CacheInterface
         $this->config = $config;
     }
 
-    /**
-     * @return void
-     */
     public function warmUp(): void
     {
         $this->removeDir($this->getCacheDir());
         $this->router->warmUp($this->getCacheDir() ?? '');
     }
 
-    /**
-     * @param string|null $cacheDir
-     *
-     * @return void
-     */
     protected function removeDir(?string $cacheDir): void
     {
         if ($cacheDir === null || !is_dir($cacheDir)) {
@@ -64,8 +51,5 @@ abstract class AbstractCacheWarmer implements CacheInterface
         $this->fileSystem->remove($cacheDir);
     }
 
-    /**
-     * @return string|null
-     */
     abstract protected function getCacheDir(): ?string;
 }

@@ -31,27 +31,16 @@ class RouterCommunicationTester extends Actor
 {
     use _generated\RouterCommunicationTesterActions;
 
-    /**
-     * @return string
-     */
     public function getMockControllerNamespace(): string
     {
         return 'Spryker\Zed\Router\Communication\Controller\MockController';
     }
 
-    /**
-     * @param array $services
-     *
-     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
-     */
     public function getControllerResolver(array $services = []): ControllerResolverInterface
     {
         return new ControllerResolver(new Container($services));
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerUrl(): Request
     {
         $request = $this->getRequest();
@@ -60,9 +49,6 @@ class RouterCommunicationTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerService(): Request
     {
         $request = $this->getRequest();
@@ -71,20 +57,11 @@ class RouterCommunicationTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequest(): Request
     {
         return Request::createFromGlobals();
     }
 
-    /**
-     * @param string $controller
-     * @param array $resolvedController
-     *
-     * @return void
-     */
     public function assertController(string $controller, array $resolvedController): void
     {
         if (is_object($resolvedController[0])) {

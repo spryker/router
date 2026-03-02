@@ -68,18 +68,10 @@ class BackofficeRouterResourceTest extends Unit
         ];
     }
 
-    /**
-     * @param \Spryker\Zed\Router\RouterConfig $config
-     *
-     * @return \Spryker\Zed\Router\Business\RouterResource\ResourceInterface
-     */
     protected function createBackofficeRouterResource(RouterConfig $config): ResourceInterface
     {
         return new class ($config) extends BackofficeRouterResource
         {
-            /**
-             * @return \Symfony\Component\Finder\Finder
-             */
             public function getFinder(): Finder
             {
                 return parent::getFinder();

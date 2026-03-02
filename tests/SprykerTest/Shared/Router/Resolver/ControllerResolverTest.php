@@ -27,9 +27,6 @@ class ControllerResolverTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsFalseWhenControllerNotInRequestAttributes(): void
     {
         // Arrange
@@ -42,9 +39,6 @@ class ControllerResolverTest extends Unit
         $this->assertFalse($controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsFalseWhenControllerIsNotAStringNotAnArrayAndNotAnObject(): void
     {
         // Arrange
@@ -57,9 +51,6 @@ class ControllerResolverTest extends Unit
         $this->assertFalse($controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsAnArrayWhenControllerIsAService(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/MockController.php');
@@ -75,9 +66,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertController($this->tester->getMockControllerNamespace(), $controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsFalseWhenControllerIsAServiceButNotFoundInContainer(): void
     {
         // Arrange
@@ -90,9 +78,6 @@ class ControllerResolverTest extends Unit
         $this->assertFalse($controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsFalseWhenControllerIsInvalidString(): void
     {
         // Arrange
@@ -105,9 +90,6 @@ class ControllerResolverTest extends Unit
         $this->assertFalse($controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsAnArrayWhenControllerIsAnArrayAndIsCallable(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/MockController.php');
@@ -122,9 +104,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertController($this->tester->getMockControllerNamespace(), $controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsAnArrayWhenControllerIsAnArrayAndIsNotCallable(): void
     {
         // Arrange
@@ -137,9 +116,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertController($this->tester->getMockControllerNamespace(), $controller);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerReturnsAnInvokedObjectWhenControllerIsAnObjectAndIsInvokable(): void
     {
         // Arrange
@@ -152,9 +128,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertInvokeCalledOnController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerThrowsAnExceptionWhenControllerIsAnObjectAndIsNotInvokable(): void
     {
         // Arrange
@@ -167,9 +140,6 @@ class ControllerResolverTest extends Unit
         $this->tester->getControllerResolver()->getController($request);
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenMethodsExist(): void
     {
         // Arrange
@@ -182,9 +152,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertSetApplicationAndInitializeCalledOnController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenLoadedFromGlobalContainer(): void
     {
         // Arrange
@@ -198,9 +165,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenLoadedFromNestedContainer(): void
     {
         // Arrange
@@ -214,9 +178,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenLoadedFromContainerDelegatorInArray(): void
     {
         // Arrange
@@ -230,9 +191,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenLoadedFromServiceIdentifier(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
@@ -249,9 +207,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenControllerIsClosureInArray(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
@@ -275,9 +230,6 @@ class ControllerResolverTest extends Unit
         $this->tester->assertSetApplicationAndInitializeCalledOnTestController();
     }
 
-    /**
-     * @return void
-     */
     public function testGetControllerInjectsAndInitializesWhenControllerIsInstantiatedDirectly(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');

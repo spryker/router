@@ -24,28 +24,18 @@ class Cache implements CacheInterface
      */
     protected $config;
 
-    /**
-     * @param \Spryker\Yves\Router\Router\ChainRouter $router
-     * @param \Spryker\Yves\Router\RouterConfig $config
-     */
     public function __construct(ChainRouter $router, RouterConfig $config)
     {
         $this->router = $router;
         $this->config = $config;
     }
 
-    /**
-     * @return void
-     */
     public function warmUp(): void
     {
         $this->clear();
         $this->router->warmUp('');
     }
 
-    /**
-     * @return void
-     */
     protected function clear(): void
     {
         $filesystem = new Filesystem();

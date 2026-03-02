@@ -12,9 +12,6 @@ use Symfony\Component\Finder\Finder;
 
 class BackofficeRouterResource extends AbstractRouterResource
 {
-    /**
-     * @return \Symfony\Component\Finder\Finder
-     */
     protected function getFinder(): Finder
     {
         $finder = new Finder();

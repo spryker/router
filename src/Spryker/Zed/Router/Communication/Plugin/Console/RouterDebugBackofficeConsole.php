@@ -20,9 +20,6 @@ class RouterDebugBackofficeConsole extends AbstractRouterDebugConsole
      */
     protected const NAME = 'router:debug:backoffice';
 
-    /**
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function getRouteCollection(): RouteCollection
     {
         return $this->getFacade()->getBackofficeChainRouter()->getRouteCollection();

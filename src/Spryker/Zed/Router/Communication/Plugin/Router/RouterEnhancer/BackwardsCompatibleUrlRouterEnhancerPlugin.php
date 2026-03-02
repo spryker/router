@@ -43,9 +43,6 @@ class BackwardsCompatibleUrlRouterEnhancerPlugin extends AbstractRouterEnhancerP
         return $this->getFilter()->filter($pathinfo);
     }
 
-    /**
-     * @return \Laminas\Filter\FilterChain
-     */
     protected function getFilter(): FilterChain
     {
         $filter = new FilterChain();

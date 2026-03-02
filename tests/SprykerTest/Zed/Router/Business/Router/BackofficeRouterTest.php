@@ -44,18 +44,12 @@ class BackofficeRouterTest extends Unit
      */
     protected RouterBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     protected function tearDown(): void
     {
         parent::tearDown();
         $this->tester->cleanCache();
     }
 
-    /**
-     * @return void
-     */
     public function testGetBackofficeRouteCollectionReturnsRoutesFromLoaderWhenCacheDirIsNull(): void
     {
         // Arrange
@@ -73,9 +67,6 @@ class BackofficeRouterTest extends Unit
         $this->tester->assertArrayHasKey('test1', $routes);
     }
 
-    /**
-     * @return void
-     */
     public function testGetBackofficeRouteCollectionRetrievesRoutesFromCachePath(): void
     {
         // Arrange
@@ -93,9 +84,6 @@ class BackofficeRouterTest extends Unit
         $this->tester->assertArrayHasKey('test1', $generatedRoutes);
     }
 
-    /**
-     * @return void
-     */
     public function testGetBackofficeRouteCollectionHandlesEmptyRouteCollectionGracefully(): void
     {
         // Arrange
@@ -112,13 +100,6 @@ class BackofficeRouterTest extends Unit
         $this->assertEmpty($generatedRoutes);
     }
 
-    /**
-     * @param \Spryker\Zed\Router\Business\Route\RouteCollection $routeCollection
-     * @param array $options
-     * @param bool $withCache
-     *
-     * @return \Spryker\Zed\Router\Business\Router\Router
-     */
     protected function mockDependencies(
         RouteCollection $routeCollection,
         array $options = [],

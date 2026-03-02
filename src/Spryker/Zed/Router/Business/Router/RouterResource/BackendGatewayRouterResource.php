@@ -11,9 +11,6 @@ use Symfony\Component\Finder\Finder;
 
 class BackendGatewayRouterResource extends AbstractRouterResource
 {
-    /**
-     * @return \Symfony\Component\Finder\Finder
-     */
     protected function getFinder(): Finder
     {
         $finder = new Finder();

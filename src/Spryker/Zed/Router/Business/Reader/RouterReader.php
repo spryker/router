@@ -19,17 +19,11 @@ class RouterReader implements RouterReaderInterface
      */
     protected RouteCollection $routeCollection;
 
-    /**
-     * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-     */
     public function __construct(RouteCollection $routeCollection)
     {
         $this->routeCollection = $routeCollection;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RouterBundleCollectionTransfer
-     */
     public function getBundleCollection(): RouterBundleCollectionTransfer
     {
         $tree = $this->tree();
@@ -38,11 +32,6 @@ class RouterReader implements RouterReaderInterface
         return (new RouterBundleCollectionTransfer())->setBundles($bundles);
     }
 
-    /**
-     * @param string $bundle
-     *
-     * @return \Generated\Shared\Transfer\RouterControllerCollectionTransfer
-     */
     public function getControllerCollection(string $bundle): RouterControllerCollectionTransfer
     {
         $routerControllerCollectionTransfer = (new RouterControllerCollectionTransfer());
@@ -57,12 +46,6 @@ class RouterReader implements RouterReaderInterface
         return $routerControllerCollectionTransfer->setControllers($controllers);
     }
 
-    /**
-     * @param string $bundle
-     * @param string $controller
-     *
-     * @return \Generated\Shared\Transfer\RouterActionCollectionTransfer
-     */
     public function getActionCollection(string $bundle, string $controller): RouterActionCollectionTransfer
     {
         $routerActionCollectionTransfer = (new RouterActionCollectionTransfer());

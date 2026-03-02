@@ -9,9 +9,6 @@ namespace Spryker\Zed\Router\Business\Cache;
 
 class BackofficeCacheWarmer extends AbstractCacheWarmer
 {
-    /**
-     * @return string|null
-     */
     protected function getCacheDir(): ?string
     {
         return $this->config->getBackofficeRouterConfiguration()['cache_dir'] ?? null;

@@ -21,9 +21,6 @@ class RouterCacheWarmUpConsole extends Console
      */
     protected const NAME = 'router:cache:warm-up';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this
@@ -31,12 +28,6 @@ class RouterCacheWarmUpConsole extends Console
             ->setDescription('Builds a fresh cache for the Yves router.');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->getFactory()->createCache()->warmUp();

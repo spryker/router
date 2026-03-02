@@ -36,12 +36,6 @@ class SslPostAddRouteManipulatorPlugin extends AbstractPlugin implements PostAdd
      */
     protected $isSslEnabled;
 
-    /**
-     * @param string $routeName
-     * @param \Symfony\Component\Routing\Route $route
-     *
-     * @return \Symfony\Component\Routing\Route
-     */
     public function manipulate(string $routeName, Route $route): Route
     {
         if ($this->isSslEnabled()) {
@@ -55,9 +49,6 @@ class SslPostAddRouteManipulatorPlugin extends AbstractPlugin implements PostAdd
         return $route;
     }
 
-    /**
-     * @return bool
-     */
     protected function isSslEnabled(): bool
     {
         if ($this->isSslEnabled === null) {

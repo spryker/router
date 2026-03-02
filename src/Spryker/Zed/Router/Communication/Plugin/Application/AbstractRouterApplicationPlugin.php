@@ -58,18 +58,8 @@ abstract class AbstractRouterApplicationPlugin extends AbstractPlugin implements
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     abstract protected function provideRouter(ContainerInterface $container): ContainerInterface;
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provideControllerResolver(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SERVICE_CONTROLLER_RESOLVER, function () use ($container) {
@@ -79,11 +69,6 @@ abstract class AbstractRouterApplicationPlugin extends AbstractPlugin implements
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provideArgumentResolver(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SERVICE_ARGUMENT_RESOLVER, function () {

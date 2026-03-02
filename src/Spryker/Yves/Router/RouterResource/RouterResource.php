@@ -31,9 +31,6 @@ class RouterResource implements ResourceInterface
         $this->routeProvider = $routeProvider;
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     public function __invoke(): RouteCollection
     {
         foreach ($this->routeProvider as $routeProviderPlugin) {

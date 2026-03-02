@@ -64,9 +64,6 @@ class RouterYvesTester extends Actor
      */
     protected const REDIS_PASSWORD = 'STORAGE_REDIS:STORAGE_REDIS_PASSWORD';
 
-    /**
-     * @return void
-     */
     public function setupStorageRedisConfig(): void
     {
         $this->setConfig(StorageConstants::STORAGE_REDIS_PROTOCOL, Config::get(static::REDIS_SCHEME, false));

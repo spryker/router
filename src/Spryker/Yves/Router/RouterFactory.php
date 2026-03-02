@@ -52,9 +52,6 @@ class RouterFactory extends AbstractFactory
         return $this->getProvidedDependency(RouterDependencyProvider::ROUTER_PLUGINS);
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Router\RouterInterface
-     */
     public function createYvesRouter(): RouterInterface
     {
         return new Router(
@@ -65,17 +62,11 @@ class RouterFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Loader\LoaderInterface
-     */
     public function createClosureLoader(): LoaderInterface
     {
         return new ClosureLoader();
     }
 
-    /**
-     * @return \Spryker\Yves\Router\RouterResource\ResourceInterface
-     */
     public function createResource(): ResourceInterface
     {
         return new RouterResource(
@@ -84,9 +75,6 @@ class RouterFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     public function createRouteCollection(): RouteCollection
     {
         return new RouteCollection(
@@ -118,9 +106,6 @@ class RouterFactory extends AbstractFactory
         return $this->getProvidedDependency(RouterDependencyProvider::ROUTER_ENHANCER_PLUGINS);
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Router\RouterInterface
-     */
     public function createYvesDevelopmentRouter(): RouterInterface
     {
         return new Router(
@@ -131,9 +116,6 @@ class RouterFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
-     */
     public function createArgumentResolver(): ArgumentResolverInterface
     {
         return new ArgumentResolver(
@@ -142,9 +124,6 @@ class RouterFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface
-     */
     public function createArgumentMetaDataFactory(): ArgumentMetadataFactoryInterface
     {
         return new ArgumentMetadataFactory();
@@ -165,65 +144,41 @@ class RouterFactory extends AbstractFactory
         ];
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createRequestAttributeValueResolver(): ArgumentValueResolverInterface
     {
         return new RequestAttributeValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createRequestRequestValueResolver(): ArgumentValueResolverInterface
     {
         return new RequestRequestValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createRequestValueResolver(): ArgumentValueResolverInterface
     {
         return new RequestValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createSessionValueResolver(): ArgumentValueResolverInterface
     {
         return new SessionValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createDefaultValueResolver(): ArgumentValueResolverInterface
     {
         return new DefaultValueResolver();
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface
-     */
     public function createVariadicValueResolver(): ArgumentValueResolverInterface
     {
         return new VariadicValueResolver();
     }
 
-    /**
-     * @return \Spryker\Shared\Router\Cache\CacheInterface
-     */
     public function createCache(): CacheInterface
     {
         return new Cache($this->createRouter(), $this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Yves\Router\Dependency\Client\RouterToStoreClientInterface
-     */
     public function getStoreClient(): RouterToStoreClientInterface
     {
         return $this->getProvidedDependency(RouterDependencyProvider::CLIENT_STORE);

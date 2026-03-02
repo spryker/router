@@ -47,9 +47,6 @@ class RouterConfig extends AbstractBundleConfig
         ];
     }
 
-    /**
-     * @return string|null
-     */
     protected function getBackofficeCachePathIfCacheEnabled(): ?string
     {
         if ($this->get(RouterConstants::BACKOFFICE_IS_CACHE_ENABLED, true)) {
@@ -132,9 +129,6 @@ class RouterConfig extends AbstractBundleConfig
         ];
     }
 
-    /**
-     * @return string|null
-     */
     protected function getBackendGatewayCachePathIfCacheEnabled(): ?string
     {
         if ($this->get(RouterConstants::BACKEND_GATEWAY_IS_CACHE_ENABLED, true)) {
@@ -200,9 +194,6 @@ class RouterConfig extends AbstractBundleConfig
         return $routerConfiguration;
     }
 
-    /**
-     * @return string|null
-     */
     protected function getCachePathIfCacheEnabled(): ?string
     {
         if ($this->get(RouterConstants::ZED_IS_CACHE_ENABLED, true)) {
@@ -245,17 +236,11 @@ class RouterConfig extends AbstractBundleConfig
         return $this->filterDirectories($controllerDirectories);
     }
 
-    /**
-     * @return string
-     */
     protected function getSourceDirectory(): string
     {
         return rtrim(APPLICATION_SOURCE_DIR, '/');
     }
 
-    /**
-     * @return string
-     */
     protected function getVendorDirectory(): string
     {
         return rtrim(APPLICATION_VENDOR_DIR, '/');

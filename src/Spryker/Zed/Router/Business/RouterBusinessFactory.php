@@ -33,9 +33,6 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class RouterBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\ChainRouter
-     */
     public function createBackofficeChainRouter(): ChainRouter
     {
         return new ChainRouter($this->getBackofficeRouterPlugins());
@@ -49,9 +46,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_BACKOFFICE_ROUTER);
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\ChainRouter
-     */
     public function createMerchantPortalChainRouter(): ChainRouter
     {
         return new ChainRouter($this->getMerchantPortalRouterPlugins());
@@ -65,9 +59,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_MERCHANT_PORTAL_ROUTER);
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\RouterInterface
-     */
     public function createBackofficeRouter(): RouterInterface
     {
         return new Router(
@@ -79,9 +70,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\RouterInterface
-     */
     public function createMerchantPortalRouter(): RouterInterface
     {
         return new Router(
@@ -93,9 +81,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\RouterResource\ResourceInterface
-     */
     public function createBackofficeRouterResource(): ResourceInterface
     {
         return new BackofficeRouterResource(
@@ -111,9 +96,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_BACKOFFICE_ROUTER_ENHANCER);
     }
 
-    /**
-     * @return \Spryker\Shared\Router\Cache\CacheInterface
-     */
     public function createBackofficeCacheWarmer(): CacheInterface
     {
         return new BackofficeCacheWarmer(
@@ -123,9 +105,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\ChainRouter
-     */
     public function createBackendGatewayChainRouter(): ChainRouter
     {
         return new ChainRouter($this->getBackendGatewayRouterPlugins());
@@ -139,9 +118,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_BACKEND_GATEWAY_ROUTER);
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\RouterResource\ResourceInterface
-     */
     public function createMerchantPortalRouterResource(): ResourceInterface
     {
         return new MerchantPortalRouterResource(
@@ -149,9 +125,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\RouterInterface
-     */
     public function createBackendGatewayRouter(): RouterInterface
     {
         return new Router(
@@ -163,9 +136,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\RouterResource\ResourceInterface
-     */
     public function createBackendGatewayRouterResource(): ResourceInterface
     {
         return new BackendGatewayRouterResource(
@@ -181,9 +151,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_MERCHANT_PORTAL_ROUTER_ENHANCER);
     }
 
-    /**
-     * @return \Spryker\Shared\Router\Cache\CacheInterface
-     */
     public function createMerchantPortalCacheWarmer(): CacheInterface
     {
         return new MerchantPortalCacheWarmer(
@@ -201,9 +168,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_BACKEND_GATEWAY_ROUTER_ENHANCER);
     }
 
-    /**
-     * @return \Spryker\Shared\Router\Cache\CacheInterface
-     */
     public function createBackendGatewayCacheWarmer(): CacheInterface
     {
         return new BackendGatewayCacheWarmer(
@@ -213,9 +177,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\ChainRouter
-     */
     public function createBackendApiChainRouter(): ChainRouter
     {
         return new ChainRouter($this->getBackendApiRouterPlugins());
@@ -229,17 +190,11 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::PLUGINS_BACKEND_API_ROUTER);
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Loader\LoaderInterface
-     */
     public function createClosureLoader(): LoaderInterface
     {
         return new ClosureLoader();
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\ChainRouter
-     */
     public function createRouter(): ChainRouter
     {
         return new ChainRouter($this->getRouterPlugins());
@@ -253,9 +208,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::ROUTER_PLUGINS);
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\RouterInterface
-     */
     public function createZedRouter(): RouterInterface
     {
         return new Router(
@@ -275,9 +227,6 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(RouterDependencyProvider::ROUTER_ENHANCER_PLUGINS);
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Router\RouterInterface
-     */
     public function createZedDevelopmentRouter(): RouterInterface
     {
         return new Router(
@@ -289,17 +238,11 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Shared\Router\Cache\CacheInterface
-     */
     public function createCache(): CacheInterface
     {
         return new Cache($this->createRouter(), $this->getConfig());
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\RouterResource\ResourceInterface
-     */
     public function createResource(): ResourceInterface
     {
         return new RouterResource(
@@ -307,17 +250,11 @@ class RouterBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Symfony\Component\Filesystem\Filesystem
-     */
     public function createFilesystem(): Filesystem
     {
         return new Filesystem();
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Reader\RouterReaderInterface
-     */
     public function createRouterReader(): RouterReaderInterface
     {
         return new RouterReader(

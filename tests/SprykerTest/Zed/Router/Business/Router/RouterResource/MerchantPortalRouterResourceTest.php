@@ -92,11 +92,6 @@ class MerchantPortalRouterResourceTest extends Unit
         ];
     }
 
-    /**
-     * @param \Spryker\Zed\Router\RouterConfig $config
-     *
-     * @return \Spryker\Zed\Router\Business\RouterResource\ResourceInterface
-     */
     protected function createMerchantPortalRouterResource(RouterConfig $config): ResourceInterface
     {
         return new class ($config) extends MerchantPortalRouterResource

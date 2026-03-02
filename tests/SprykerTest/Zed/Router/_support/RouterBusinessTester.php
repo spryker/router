@@ -42,9 +42,6 @@ class RouterBusinessTester extends Actor
      */
     protected const CACHE_FILE = 'url_generating_routes.php';
 
-    /**
-     * @return void
-     */
     public function cleanCache(): void
     {
         $dirName = $this->getCacheDir();
@@ -54,9 +51,6 @@ class RouterBusinessTester extends Actor
         }
     }
 
-    /**
-     * @return string
-     */
     public function getCacheDir(): string
     {
         $moduleRoot = realpath(
@@ -66,9 +60,6 @@ class RouterBusinessTester extends Actor
         return $moduleRoot . static::CACHE_DIR;
     }
 
-    /**
-     * @return string
-     */
     public function getCacheFileName(): string
     {
         return $this->getCacheDir() . static::CACHE_FILE;

@@ -57,11 +57,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addRouterPlugins(Container $container): Container
     {
         $container->set(static::ROUTER_PLUGINS, function () {
@@ -79,11 +74,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addRouterEnhancerPlugins(Container $container): Container
     {
         $container->set(static::ROUTER_ENHANCER_PLUGINS, function () {
@@ -101,11 +91,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addRouteProvider(Container $container): Container
     {
         $container->set(static::ROUTER_ROUTE_PROVIDER, function () {
@@ -123,11 +108,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addPostAddRouteManipulator(Container $container): Container
     {
         $container->set(static::POST_ADD_ROUTE_MANIPULATOR, function () {
@@ -145,11 +125,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addStoreClient(Container $container): Container
     {
         $container->set(static::CLIENT_STORE, function (Container $container) {

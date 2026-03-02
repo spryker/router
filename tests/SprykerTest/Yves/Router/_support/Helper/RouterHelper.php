@@ -36,11 +36,6 @@ class RouterHelper extends Module
      */
     protected $routeCollection;
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _before(TestInterface $test): void
     {
         $this->getApplicationHelper()->addApplicationPlugin(new RouterApplicationPlugin());

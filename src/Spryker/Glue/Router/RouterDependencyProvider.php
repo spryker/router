@@ -20,11 +20,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_ROUTER = 'PLUGINS_ROUTER';
 
-    /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
     public function provideDependencies(Container $container): Container
     {
         $container = $this->addRouterPlugins($container);
@@ -32,11 +27,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
     protected function addRouterPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_ROUTER, function () {

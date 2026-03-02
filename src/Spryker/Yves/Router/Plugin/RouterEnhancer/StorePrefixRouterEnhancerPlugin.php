@@ -27,12 +27,6 @@ class StorePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
      */
     protected $currentStore;
 
-    /**
-     * @param string $pathinfo
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return string
-     */
     public function beforeMatch(string $pathinfo, RequestContext $requestContext): string
     {
         if ($pathinfo === '/') {
@@ -49,12 +43,6 @@ class StorePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $pathinfo;
     }
 
-    /**
-     * @param array $parameters
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return array
-     */
     public function afterMatch(array $parameters, RequestContext $requestContext): array
     {
         if ($this->currentStore !== null) {
@@ -64,13 +52,6 @@ class StorePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $parameters;
     }
 
-    /**
-     * @param string $url
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     * @param int $referenceType
-     *
-     * @return string
-     */
     public function afterGenerate(string $url, RequestContext $requestContext, int $referenceType): string
     {
         $store = $this->findStore($requestContext);
@@ -82,11 +63,6 @@ class StorePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $url;
     }
 
-    /**
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return string|null
-     */
     protected function findStore(RequestContext $requestContext): ?string
     {
         return $requestContext->hasParameter(static::PARAMETER_STORE) && $requestContext->getParameter(static::PARAMETER_STORE) !== null
@@ -96,13 +72,6 @@ class StorePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
                 : null);
     }
 
-    /**
-     * @param string $url
-     * @param string $store
-     * @param int $referenceType
-     *
-     * @return string
-     */
     protected function buildUrlWithStore(string $url, string $store, int $referenceType): string
     {
         if ($url === '/') {

@@ -29,9 +29,6 @@ class YvesRouterPluginRouteConverterTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -43,9 +40,6 @@ class YvesRouterPluginRouteConverterTest extends Unit
         ]);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateWillConvertRouteParameter(): void
     {
         $routerPlugin = new YvesRouterPlugin();

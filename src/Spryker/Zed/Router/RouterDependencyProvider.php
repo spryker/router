@@ -60,11 +60,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_BACKEND_GATEWAY_ROUTER_ENHANCER = 'PLUGINS_BACKEND_GATEWAY_ROUTER_ENHANCER';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = $this->addRouterPlugins($container);
@@ -84,11 +79,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addBackofficeRouterPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_BACKOFFICE_ROUTER, function () {
@@ -106,11 +96,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addBackofficeRouterEnhancerPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_BACKOFFICE_ROUTER_ENHANCER, function () {
@@ -120,11 +105,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addMerchantPortalRouterPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_MERCHANT_PORTAL_ROUTER, function () {
@@ -142,11 +122,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addMerchantPortalRouterEnhancerPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_MERCHANT_PORTAL_ROUTER_ENHANCER, function () {
@@ -172,11 +147,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addBackendGatewayRouterPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_BACKEND_GATEWAY_ROUTER, function () {
@@ -194,11 +164,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addBackendGatewayRouterEnhancerPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_BACKEND_GATEWAY_ROUTER_ENHANCER, function () {
@@ -216,11 +181,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addBackendApiRouterPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_BACKEND_API_ROUTER, function () {
@@ -238,11 +198,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addRouterPlugins(Container $container): Container
     {
         $container->set(static::ROUTER_PLUGINS, function () {
@@ -260,11 +215,6 @@ class RouterDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addRouterEnhancerPlugins(Container $container): Container
     {
         $container->set(static::ROUTER_ENHANCER_PLUGINS, function () {

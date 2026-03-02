@@ -16,11 +16,6 @@ use Spryker\Service\Container\ContainerInterface;
  */
 class BackendGatewayRouterApplicationPlugin extends AbstractRouterApplicationPlugin
 {
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provideRouter(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SERVICE_ROUTER, function () {

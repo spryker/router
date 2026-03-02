@@ -29,11 +29,6 @@ class CompiledUrlMatcher extends SymfonyCompiledUrlMatcher implements RouterEnha
         $this->routerEnhancerPlugins = $routerEnhancerPlugins;
     }
 
-    /**
-     * @param string $pathinfo
-     *
-     * @return array
-     */
     public function match(string $pathinfo): array
     {
         foreach ($this->routerEnhancerPlugins as $routerEnhancerPlugin) {
@@ -49,13 +44,6 @@ class CompiledUrlMatcher extends SymfonyCompiledUrlMatcher implements RouterEnha
         return $parameters;
     }
 
-    /**
-     * @param string $path
-     * @param string $route
-     * @param string|null $scheme
-     *
-     * @return array
-     */
     public function redirect(string $path, string $route, ?string $scheme = null): array
     {
         $url = $this->context->getBaseUrl() . $path;

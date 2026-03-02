@@ -37,9 +37,6 @@ class RouterFacadeTest extends Unit
      */
     protected RouterFacade $routerFacade;
 
-    /**
-     * @return void
-     */
     public function testGetBundlesReturnsCorrectResult(): void
     {
         // Arrange
@@ -128,9 +125,6 @@ class RouterFacadeTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function mockFactory(): void
     {
         $routerMock = $this->getMockBuilder(ChainRouter::class)

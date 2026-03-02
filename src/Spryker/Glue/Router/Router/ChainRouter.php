@@ -45,11 +45,6 @@ class ChainRouter extends SymfonyChainRouter
         }
     }
 
-    /**
-     * @param \Symfony\Component\Routing\RequestContext|null $requestContext
-     *
-     * @return void
-     */
     protected function addRequestContext(?RequestContext $requestContext = null): void
     {
         $request = Request::createFromGlobals();

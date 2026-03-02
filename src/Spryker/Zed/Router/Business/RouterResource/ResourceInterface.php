@@ -11,8 +11,5 @@ use Spryker\Zed\Router\Business\Route\RouteCollection;
 
 interface ResourceInterface
 {
-    /**
-     * @return \Spryker\Zed\Router\Business\Route\RouteCollection
-     */
     public function __invoke(): RouteCollection;
 }

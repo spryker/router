@@ -44,17 +44,11 @@ class RouterResource implements ResourceInterface
      */
     protected $filterChain;
 
-    /**
-     * @param \Spryker\Zed\Router\RouterConfig $config
-     */
     public function __construct(RouterConfig $config)
     {
         $this->config = $config;
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Route\RouteCollection
-     */
     public function __invoke(): RouteCollection
     {
         $routeCollection = new RouteCollection();
@@ -99,13 +93,6 @@ class RouterResource implements ResourceInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \ReflectionMethod $method
-     * @param string $className
-     * @param \Spryker\Zed\Router\Business\Route\RouteCollection $routeCollection
-     *
-     * @return \Spryker\Zed\Router\Business\Route\RouteCollection
-     */
     protected function addRoutesForMethod(ReflectionMethod $method, string $className, RouteCollection $routeCollection): RouteCollection
     {
         if (!$method->isPublic() || strpos($method->getName(), 'Action') === false) {
@@ -130,11 +117,6 @@ class RouterResource implements ResourceInterface
         return $routeCollection;
     }
 
-    /**
-     * @param \Symfony\Component\Finder\SplFileInfo $fileInfo
-     *
-     * @return string
-     */
     protected function getClassNameFromFile(SplFileInfo $fileInfo): string
     {
         $classNameSrcPart = explode('src', $fileInfo->getPathname());
@@ -145,13 +127,6 @@ class RouterResource implements ResourceInterface
         return $className;
     }
 
-    /**
-     * @param string $module
-     * @param string $controller
-     * @param string $action
-     *
-     * @return string
-     */
     protected function getTemplate(string $module, string $controller, string $action): string
     {
         $template = sprintf(
@@ -164,13 +139,6 @@ class RouterResource implements ResourceInterface
         return $template;
     }
 
-    /**
-     * @param string $module
-     * @param string $controller
-     * @param string $action
-     *
-     * @return string
-     */
     protected function getControllerClassName(string $module, string $controller, string $action): string
     {
         $bundleControllerAction = new BundleControllerAction($module, $controller, $action);
@@ -179,13 +147,6 @@ class RouterResource implements ResourceInterface
         return $controllerResolver->getResolvedClassName($bundleControllerAction);
     }
 
-    /**
-     * @param string $module
-     * @param string $controller
-     * @param string $action
-     *
-     * @return array
-     */
     protected function getPathCandidates(string $module, string $controller, string $action): array
     {
         $module = $this->getFilterChain()->filter($module);
@@ -211,9 +172,6 @@ class RouterResource implements ResourceInterface
         return $pathCandidates;
     }
 
-    /**
-     * @return \Laminas\Filter\FilterChain
-     */
     protected function getFilterChain(): FilterChain
     {
         if ($this->filterChain === null) {
@@ -226,15 +184,6 @@ class RouterResource implements ResourceInterface
         return $this->filterChain;
     }
 
-    /**
-     * @param \ReflectionMethod $method
-     * @param \Spryker\Zed\Router\Business\Route\RouteCollection $routeCollection
-     * @param string $pathCandidate
-     * @param string $controllerClassName
-     * @param string $template
-     *
-     * @return \Spryker\Zed\Router\Business\Route\RouteCollection
-     */
     protected function addRouteToCollection(
         ReflectionMethod $method,
         RouteCollection $routeCollection,

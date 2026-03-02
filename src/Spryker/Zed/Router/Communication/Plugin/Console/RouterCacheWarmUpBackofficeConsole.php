@@ -24,9 +24,6 @@ class RouterCacheWarmUpBackofficeConsole extends Console
      */
     protected const NAME = 'router:cache:warm-up:backoffice';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this
@@ -34,12 +31,6 @@ class RouterCacheWarmUpBackofficeConsole extends Console
             ->setDescription('Builds a fresh cache for the Backoffice router.');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->getFacade()->cacheWarmUp();

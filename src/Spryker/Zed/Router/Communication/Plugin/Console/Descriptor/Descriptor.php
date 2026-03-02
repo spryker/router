@@ -47,9 +47,6 @@ abstract class Descriptor implements DescriptorInterface
         }
     }
 
-    /**
-     * @return \Symfony\Component\Console\Output\OutputInterface
-     */
     protected function getOutput(): OutputInterface
     {
         return $this->output;

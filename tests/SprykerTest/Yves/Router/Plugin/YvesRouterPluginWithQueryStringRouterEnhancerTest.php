@@ -31,9 +31,6 @@ class YvesRouterPluginWithQueryStringRouterEnhancerTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -49,9 +46,6 @@ class YvesRouterPluginWithQueryStringRouterEnhancerTest extends Unit
         ]);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateReturnsUrlWithQueryParameter(): void
     {
         $routerPlugin = new YvesRouterPlugin();
@@ -68,9 +62,6 @@ class YvesRouterPluginWithQueryStringRouterEnhancerTest extends Unit
         $this->assertSame('/foo?foo=bar&baz=bat', $url);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateReturnsUrlWithoutQueryParameter(): void
     {
         $routerPlugin = new YvesRouterPlugin();

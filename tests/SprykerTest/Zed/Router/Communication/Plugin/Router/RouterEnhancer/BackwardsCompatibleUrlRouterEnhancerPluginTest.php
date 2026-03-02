@@ -26,9 +26,6 @@ use Symfony\Component\Routing\RequestContext;
  */
 class BackwardsCompatibleUrlRouterEnhancerPluginTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testBeforeMatchConvertsCamelCasedUrlsToDashedUrls(): void
     {
         $backwardsCompatibleUrlRouterEnhancerPlugin = new BackwardsCompatibleUrlRouterEnhancerPlugin();

@@ -50,9 +50,6 @@ class RouterDebugYvesConsole extends Command
      */
     protected const OPTION_SHOW_CONTROLLERS_SHORT = 'c';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this
@@ -64,9 +61,6 @@ class RouterDebugYvesConsole extends Command
             ]);
     }
 
-    /**
-     * @return \Spryker\Yves\Router\RouterFactory
-     */
     protected function getFactory(): RouterFactory
     {
         return new RouterFactory();
@@ -119,12 +113,6 @@ class RouterDebugYvesConsole extends Command
         return static::CODE_SUCCESS;
     }
 
-    /**
-     * @param string $name
-     * @param \Symfony\Component\Routing\RouteCollection $routes
-     *
-     * @return array
-     */
     private function findRouteNameContaining(string $name, RouteCollection $routes): array
     {
         $foundRoutesNames = [];

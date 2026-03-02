@@ -59,11 +59,6 @@ class RouterApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provideRouter(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SERVICE_ROUTER, function () {
@@ -94,11 +89,6 @@ class RouterApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
         $container->configure($serviceName, $configuration);
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provideControllerResolver(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SERVICE_CONTROLLER_RESOLVER, function () use ($container) {
@@ -108,11 +98,6 @@ class RouterApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provideArgumentResolver(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SERVICE_ARGUMENT_RESOLVER, function () {

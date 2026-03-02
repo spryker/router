@@ -34,9 +34,6 @@ class YvesRouterPluginWithLanguageAndStorePrefixRouterEnhancerTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();

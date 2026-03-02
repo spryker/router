@@ -11,8 +11,5 @@ use Spryker\Yves\Router\Route\RouteCollection;
 
 interface ResourceInterface
 {
-    /**
-     * @return \Spryker\Yves\Router\Route\RouteCollection
-     */
     public function __invoke(): RouteCollection;
 }

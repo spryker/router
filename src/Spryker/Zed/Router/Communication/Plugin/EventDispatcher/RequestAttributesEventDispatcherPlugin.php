@@ -93,11 +93,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
-     *
-     * @return \Symfony\Component\HttpKernel\Event\RequestEvent
-     */
     protected function addRequestAttributes(RequestEvent $event): RequestEvent
     {
         if (!$this->isCli($event)) {
@@ -107,21 +102,11 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $this->parseCliRequestData($event);
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
-     *
-     * @return bool
-     */
     protected function isCli(RequestEvent $event): bool
     {
         return (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') && $event->getRequest()->server->get('argv', false);
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
-     *
-     * @return \Symfony\Component\HttpKernel\Event\RequestEvent
-     */
     protected function parseRequestData(RequestEvent $event): RequestEvent
     {
         $request = $event->getRequest();
@@ -135,11 +120,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $event;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return array
-     */
     protected function getRequestUriFragments(Request $request): array
     {
         $requestUriWithoutParameters = (string)strtok($request->server->get('REQUEST_URI'), '?');
@@ -149,12 +129,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return explode('/', $requestUriWithoutParameters);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param array $requestUriFragments
-     *
-     * @return string
-     */
     protected function getAction(Request $request, array $requestUriFragments): string
     {
         if (count($requestUriFragments) < 3) {
@@ -164,12 +138,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $requestUriFragments[static::POSITION_OF_ACTION];
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param array $requestUriFragments
-     *
-     * @return string
-     */
     protected function getController(Request $request, array $requestUriFragments): string
     {
         if (count($requestUriFragments) < 2) {
@@ -179,12 +147,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $requestUriFragments[static::POSITION_OF_CONTROLLER];
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param array $requestUriFragments
-     *
-     * @return string
-     */
     protected function getModule(Request $request, array $requestUriFragments): string
     {
         if ($this->isDefaultModule($requestUriFragments)) {
@@ -194,11 +156,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $requestUriFragments[static::POSITION_OF_MODULE];
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
-     *
-     * @return \Symfony\Component\HttpKernel\Event\RequestEvent
-     */
     protected function parseCliRequestData(RequestEvent $event): RequestEvent
     {
         $request = $event->getRequest();
@@ -209,11 +166,6 @@ class RequestAttributesEventDispatcherPlugin extends AbstractPlugin implements E
         return $event;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function setCliRequestAttributes(Request $request): Request
     {
         foreach ($request->server->get('argv') as $argument) {

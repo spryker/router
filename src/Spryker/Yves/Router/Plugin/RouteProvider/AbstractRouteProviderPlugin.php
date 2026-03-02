@@ -24,42 +24,18 @@ abstract class AbstractRouteProviderPlugin extends AbstractPlugin implements Rou
      */
     protected $filterChain;
 
-    /**
-     * @param string $path
-     * @param string $moduleName
-     * @param string $controllerName
-     * @param string $actionName
-     *
-     * @return \Spryker\Yves\Router\Route\Route
-     */
     protected function buildGetRoute(string $path, string $moduleName, string $controllerName, string $actionName = 'indexAction'): Route
     {
         return $this->buildRoute($path, $moduleName, $controllerName, $actionName)
             ->setMethods(Request::METHOD_GET);
     }
 
-    /**
-     * @param string $path
-     * @param string $moduleName
-     * @param string $controllerName
-     * @param string $actionName
-     *
-     * @return \Spryker\Yves\Router\Route\Route
-     */
     protected function buildPostRoute(string $path, string $moduleName, string $controllerName, string $actionName = 'indexAction'): Route
     {
         return $this->buildRoute($path, $moduleName, $controllerName, $actionName)
             ->setMethods(Request::METHOD_POST);
     }
 
-    /**
-     * @param string $path
-     * @param string $moduleName
-     * @param string $controllerName
-     * @param string $actionName
-     *
-     * @return \Spryker\Yves\Router\Route\Route
-     */
     protected function buildRoute(string $path, string $moduleName, string $controllerName, string $actionName = 'indexAction'): Route
     {
         $route = new Route($path);
@@ -85,9 +61,6 @@ abstract class AbstractRouteProviderPlugin extends AbstractPlugin implements Rou
         return $route;
     }
 
-    /**
-     * @return \Laminas\Filter\FilterChain
-     */
     protected function getFilterChain(): FilterChain
     {
         if ($this->filterChain === null) {

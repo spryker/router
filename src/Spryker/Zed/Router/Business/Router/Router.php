@@ -76,9 +76,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         $this->routerEnhancerPlugins = $routerEnhancerPlugins;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\Matcher\UrlMatcherInterface|\Symfony\Component\Routing\Matcher\RequestMatcherInterface
-     */
     public function getMatcher(): UrlMatcherInterface|RequestMatcherInterface
     {
         if ($this->matcher !== null) {
@@ -92,9 +89,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return $this->matcher;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     public function getRouteCollection(): RouteCollection
     {
         $cachePath = sprintf(static::CACHE_DIR_PATH_PLACEHOLDER, $this->options[static::OPTION_CACHE_DIR], static::ROUTE_CACHE_PATH);
@@ -153,11 +147,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return static::$cache[$path] ??= require $path;
     }
 
-    /**
-     * @param \Symfony\Component\Routing\Matcher\UrlMatcherInterface $matcher
-     *
-     * @return \Symfony\Component\Routing\Matcher\UrlMatcherInterface
-     */
     protected function setRouterEnhancerPluginsToMatcher(UrlMatcherInterface $matcher): UrlMatcherInterface
     {
         if ($matcher instanceof RouterEnhancerAwareInterface) {
@@ -167,9 +156,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return $matcher;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\Generator\UrlGeneratorInterface
-     */
     public function getGenerator(): UrlGeneratorInterface
     {
         if ($this->generator !== null) {
@@ -194,11 +180,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return [];
     }
 
-    /**
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $generator
-     *
-     * @return \Symfony\Component\Routing\Generator\UrlGeneratorInterface
-     */
     protected function setRouterEnhancerPluginsToGenerator(UrlGeneratorInterface $generator): UrlGeneratorInterface
     {
         if ($generator instanceof RouterEnhancerAwareInterface) {

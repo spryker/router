@@ -13,9 +13,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class SymfonyFrameworkRouterPlugin extends AbstractPlugin implements RouterPluginInterface
 {
-    /**
-     * @return \Symfony\Component\Routing\RouterInterface
-     */
     public function getRouter(): RouterInterface
     {
         /** @var \Symfony\Component\Routing\RouterInterface */

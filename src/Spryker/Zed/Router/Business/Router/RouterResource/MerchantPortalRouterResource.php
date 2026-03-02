@@ -35,9 +35,6 @@ class MerchantPortalRouterResource extends AbstractRouterResource
      */
     protected const ROUTE_NAME_SECURITY_GUI_LOGIN = 'security-gui:login';
 
-    /**
-     * @return \Symfony\Component\Finder\Finder
-     */
     protected function getFinder(): Finder
     {
         $finder = new Finder();
@@ -52,15 +49,6 @@ class MerchantPortalRouterResource extends AbstractRouterResource
         return $finder;
     }
 
-    /**
-     * @param \ReflectionMethod $method
-     * @param \Spryker\Zed\Router\Business\Route\RouteCollection $routeCollection
-     * @param string $pathCandidate
-     * @param string $controllerClassName
-     * @param string $template
-     *
-     * @return \Spryker\Zed\Router\Business\Route\RouteCollection
-     */
     protected function addRouteToCollection(
         ReflectionMethod $method,
         RouteCollection $routeCollection,

@@ -38,45 +38,26 @@ class RouterTester extends Actor
      */
     protected $calledControllerMethods = [];
 
-    /**
-     * @return string
-     */
     public function getMockControllerNamespace(): string
     {
         return 'Spryker\Zed\Router\Communication\Controller\MockController';
     }
 
-    /**
-     * @param string $methodName
-     *
-     * @return void
-     */
     public function addCalledControllerMethod(string $methodName): void
     {
         $this->calledControllerMethods[$methodName] = true;
     }
 
-    /**
-     * @param array $services
-     *
-     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
-     */
     public function getControllerResolver(array $services = []): ControllerResolverInterface
     {
         return new ControllerResolver(new Container($services));
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequest(): Request
     {
         return Request::createFromGlobals();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithUnresolvableController(): Request
     {
         $request = $this->getRequest();
@@ -86,9 +67,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithCallableController(): Request
     {
         $request = $this->getRequest();
@@ -104,9 +82,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerService(): Request
     {
         $request = $this->getRequest();
@@ -115,9 +90,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithInvalidControllerString(): Request
     {
         $request = $this->getRequest();
@@ -126,9 +98,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerUrl(): Request
     {
         $request = $this->getRequest();
@@ -137,9 +106,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithInstantiableClass(): Request
     {
         $request = $this->getRequest();
@@ -148,9 +114,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithInvokableControllerObject(): Request
     {
         $request = $this->getRequest();
@@ -161,9 +124,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithNotInvokableControllerObject(): Request
     {
         $request = $this->getRequest();
@@ -175,11 +135,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @param \SprykerTest\Shared\Router\RouterTester $tester
-     *
-     * @return callable
-     */
     public function getInvokableControllerMock(RouterTester $tester): callable
     {
         $this->calledControllerMethods = [];
@@ -196,19 +151,11 @@ class RouterTester extends Actor
              */
             protected $container;
 
-            /**
-             * @param \SprykerTest\Shared\Router\RouterTester $tester
-             */
             public function __construct(RouterTester $tester)
             {
                 $this->tester = $tester;
             }
 
-            /**
-             * @param \Spryker\Service\Container\ContainerInterface $container
-             *
-             * @return void
-             */
             public function setApplication(ContainerInterface $container): void
             {
                 $this->container = $container;
@@ -216,17 +163,11 @@ class RouterTester extends Actor
                 $this->tester->addCalledControllerMethod('setApplication');
             }
 
-            /**
-             * @return void
-             */
             public function initialize(): void
             {
                 $this->tester->addCalledControllerMethod('initialize');
             }
 
-            /**
-             * @return string
-             */
             public function __invoke(): string
             {
                 $this->tester->addCalledControllerMethod('__invoke');
@@ -236,12 +177,6 @@ class RouterTester extends Actor
         };
     }
 
-    /**
-     * @param string $controller
-     * @param array $resolvedController
-     *
-     * @return void
-     */
     public function assertController(string $controller, array $resolvedController): void
     {
         if (is_object($resolvedController[0])) {
@@ -251,35 +186,23 @@ class RouterTester extends Actor
         $this->assertSame($controller, $resolvedController[0]);
     }
 
-    /**
-     * @return void
-     */
     public function assertSetApplicationAndInitializeCalledOnController(): void
     {
         $this->assertTrue(isset($this->calledControllerMethods['setApplication']));
         $this->assertTrue(isset($this->calledControllerMethods['initialize']));
     }
 
-    /**
-     * @return void
-     */
     public function assertInvokeCalledOnController(): void
     {
         $this->assertTrue(isset($this->calledControllerMethods['setApplication']));
         $this->assertTrue(isset($this->calledControllerMethods['initialize']));
     }
 
-    /**
-     * @return string
-     */
     public function getInitializableTestControllerNamespace(): string
     {
         return 'Spryker\Zed\Router\Communication\Controller\InitializableTestController';
     }
 
-    /**
-     * @return void
-     */
     public function assertSetApplicationAndInitializeCalledOnTestController(): void
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
@@ -292,9 +215,6 @@ class RouterTester extends Actor
         $controllerClass::resetCalledMethods();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerInGlobalContainer(): Request
     {
         $request = $this->getRequest();
@@ -304,9 +224,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
-     */
     public function getControllerResolverWithGlobalContainer(): ControllerResolverInterface
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
@@ -320,9 +237,6 @@ class RouterTester extends Actor
         return new ControllerResolver(new Container());
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerInNestedContainer(): Request
     {
         $request = $this->getRequest();
@@ -332,9 +246,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
-     */
     public function getControllerResolverWithNestedContainer(): ControllerResolverInterface
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');
@@ -347,9 +258,6 @@ class RouterTester extends Actor
         return new ControllerResolver($containerWrapper);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function getRequestWithControllerArrayFromDelegator(): Request
     {
         $request = $this->getRequest();
@@ -359,9 +267,6 @@ class RouterTester extends Actor
         return $request;
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
-     */
     public function getControllerResolverWithDelegatorService(): ControllerResolverInterface
     {
         require_once codecept_data_dir('Fixtures/Controller/InitializableTestController.php');

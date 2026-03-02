@@ -13,23 +13,9 @@ use Generated\Shared\Transfer\RouterControllerCollectionTransfer;
 
 interface RouterReaderInterface
 {
-    /**
-     * @return \Generated\Shared\Transfer\RouterBundleCollectionTransfer
-     */
     public function getBundleCollection(): RouterBundleCollectionTransfer;
 
-    /**
-     * @param string $bundle
-     *
-     * @return \Generated\Shared\Transfer\RouterControllerCollectionTransfer
-     */
     public function getControllerCollection(string $bundle): RouterControllerCollectionTransfer;
 
-    /**
-     * @param string $bundle
-     * @param string $controller
-     *
-     * @return \Generated\Shared\Transfer\RouterActionCollectionTransfer
-     */
     public function getActionCollection(string $bundle, string $controller): RouterActionCollectionTransfer;
 }

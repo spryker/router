@@ -11,9 +11,6 @@ use Codeception\Module;
 
 trait RouterHelperTrait
 {
-    /**
-     * @return \SprykerTest\Zed\Router\Helper\RouterHelper
-     */
     protected function getRouterHelper(): RouterHelper
     {
         /** @var \SprykerTest\Zed\Router\Helper\RouterHelper $routerHelper */
@@ -22,10 +19,5 @@ trait RouterHelperTrait
         return $routerHelper;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return \Codeception\Module
-     */
     abstract protected function getModule(string $name): Module;
 }

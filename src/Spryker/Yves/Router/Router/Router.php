@@ -41,9 +41,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         $this->routerEnhancerPlugins = $routerEnhancerPlugins;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\Matcher\UrlMatcherInterface|\Symfony\Component\Routing\Matcher\RequestMatcherInterface
-     */
     public function getMatcher(): UrlMatcherInterface|RequestMatcherInterface
     {
         if ($this->matcher !== null) {
@@ -70,11 +67,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return [];
     }
 
-    /**
-     * @param \Symfony\Component\Routing\Matcher\UrlMatcherInterface $matcher
-     *
-     * @return \Symfony\Component\Routing\Matcher\UrlMatcherInterface
-     */
     protected function setRouterEnhancerPluginsToMatcher(UrlMatcherInterface $matcher): UrlMatcherInterface
     {
         if ($matcher instanceof RouterEnhancerAwareInterface) {
@@ -84,9 +76,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return $matcher;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\Generator\UrlGeneratorInterface
-     */
     public function getGenerator(): UrlGeneratorInterface
     {
         if ($this->generator !== null) {
@@ -98,11 +87,6 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
         return $this->generator;
     }
 
-    /**
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $generator
-     *
-     * @return \Symfony\Component\Routing\Generator\UrlGeneratorInterface
-     */
     protected function setRouterEnhancerPluginsToGenerator(UrlGeneratorInterface $generator): UrlGeneratorInterface
     {
         if ($generator instanceof RouterEnhancerAwareInterface) {

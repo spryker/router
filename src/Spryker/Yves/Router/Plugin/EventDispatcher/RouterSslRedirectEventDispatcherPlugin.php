@@ -41,11 +41,6 @@ class RouterSslRedirectEventDispatcherPlugin extends AbstractPlugin implements E
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Spryker\Shared\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     *
-     * @return \Spryker\Shared\EventDispatcher\EventDispatcherInterface
-     */
     protected function addListener(EventDispatcherInterface $eventDispatcher): EventDispatcherInterface
     {
         $eventDispatcher->addListener(KernelEvents::REQUEST, function (RequestEvent $event): void {
@@ -61,11 +56,6 @@ class RouterSslRedirectEventDispatcherPlugin extends AbstractPlugin implements E
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return bool
-     */
     protected function shouldBeSsl(Request $request): bool
     {
         $requestIsSecure = $request->isSecure();
@@ -79,11 +69,6 @@ class RouterSslRedirectEventDispatcherPlugin extends AbstractPlugin implements E
         return (!$requestIsSecure && !$isSslExcludedResource);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return bool
-     */
     protected function isSslExcludedRouteName(Request $request): bool
     {
         return in_array($request->getPathInfo(), $this->getConfig()->getSslExcludedRouteNames(), true);

@@ -86,11 +86,6 @@ class TextDescriptor extends Descriptor
         $table->render();
     }
 
-    /**
-     * @param array $config
-     *
-     * @return string
-     */
     private function formatRouterConfig(array $config): string
     {
         if (!$config) {

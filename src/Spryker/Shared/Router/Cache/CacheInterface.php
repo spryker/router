@@ -9,8 +9,5 @@ namespace Spryker\Shared\Router\Cache;
 
 interface CacheInterface
 {
-    /**
-     * @return void
-     */
     public function warmUp(): void;
 }

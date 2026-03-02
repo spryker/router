@@ -68,12 +68,6 @@ class RouterListenerEventDispatcherPlugin extends AbstractPlugin implements Even
         return $container;
     }
 
-    /**
-     * @param \Spryker\Shared\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Shared\EventDispatcher\EventDispatcherInterface
-     */
     protected function addSubscriber(EventDispatcherInterface $eventDispatcher, ContainerInterface $container): EventDispatcherInterface
     {
         $eventDispatcher->addSubscriber(new RouterListener(
@@ -84,21 +78,11 @@ class RouterListenerEventDispatcherPlugin extends AbstractPlugin implements Even
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Zed\Router\Business\Router\ChainRouter
-     */
     protected function getChainRouter(ContainerInterface $container): ChainRouter
     {
         return $container->get(static::SERVICE_ROUTER);
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Symfony\Component\HttpFoundation\RequestStack
-     */
     protected function getRequestStack(ContainerInterface $container): RequestStack
     {
         return $container->get('request_stack');

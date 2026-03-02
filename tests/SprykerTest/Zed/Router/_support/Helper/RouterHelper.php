@@ -169,9 +169,6 @@ class RouterHelper extends Module
         $this->getContainer()->set(static::SERVICE_ROUTER, $chainRouter);
     }
 
-    /**
-     * @return void
-     */
     protected function addDependencies(): void
     {
         $this->getDependencyProviderHelper()->setDependency(RouterDependencyProvider::ROUTER_PLUGINS, $this->routerPlugins);
@@ -198,9 +195,6 @@ class RouterHelper extends Module
         return $routerApplicationPlugin;
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Communication\RouterCommunicationFactory
-     */
     protected function getFactory(): RouterCommunicationFactory
     {
         /** @var \Spryker\Zed\Router\Communication\RouterCommunicationFactory $routerCommunicationFactory */
@@ -209,9 +203,6 @@ class RouterHelper extends Module
         return $routerCommunicationFactory;
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\RouterFacadeInterface
-     */
     protected function getFacade(): RouterFacadeInterface
     {
         /** @var \Spryker\Zed\Router\Business\RouterFacadeInterface $routerFacade */
@@ -220,9 +211,6 @@ class RouterHelper extends Module
         return $routerFacade;
     }
 
-    /**
-     * @return \Spryker\Zed\Router\RouterConfig
-     */
     protected function getConfig(): RouterConfig
     {
         /** @var \Spryker\Zed\Router\RouterConfig $routerConfig */
@@ -245,9 +233,6 @@ class RouterHelper extends Module
         return $this;
     }
 
-    /**
-     * @return \Spryker\Zed\Router\Business\Route\RouteCollection
-     */
     protected function getRouteCollection(): RouteCollection
     {
         if ($this->routeCollection === null) {
@@ -257,9 +242,6 @@ class RouterHelper extends Module
         return $this->routeCollection;
     }
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function getContainer(): ContainerInterface
     {
         /** @var \Spryker\Service\Container\ContainerInterface $container */

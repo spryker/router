@@ -21,19 +21,11 @@ class ControllerResolver implements ControllerResolverInterface
      */
     protected $container;
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return callable|false
-     */
     public function getController(Request $request): callable|false
     {
         $controller = $request->attributes->get('_controller');

@@ -16,12 +16,6 @@ use Symfony\Component\Routing\Route;
  */
 class StoreDefaultPostAddRouteManipulatorPlugin extends AbstractPlugin implements PostAddRouteManipulatorPluginInterface
 {
-    /**
-     * @param string $routeName
-     * @param \Symfony\Component\Routing\Route $route
-     *
-     * @return \Symfony\Component\Routing\Route
-     */
     public function manipulate(string $routeName, Route $route): Route
     {
         $route->setDefault('store', 'US');

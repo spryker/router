@@ -22,9 +22,6 @@ class MerchantPortalRouterCacheWarmUpConsole extends Console
      */
     protected const NAME = 'router:cache:warm-up:merchant-portal';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this
@@ -32,12 +29,6 @@ class MerchantPortalRouterCacheWarmUpConsole extends Console
             ->setDescription('Builds a fresh cache for the MerchantPortal router.');
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->getFacade()->warmUpMerchantPortalRouterCache();

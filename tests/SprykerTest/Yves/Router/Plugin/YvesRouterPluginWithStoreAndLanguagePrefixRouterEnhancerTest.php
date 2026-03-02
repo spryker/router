@@ -34,9 +34,6 @@ class YvesRouterPluginWithStoreAndLanguagePrefixRouterEnhancerTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -58,9 +55,6 @@ class YvesRouterPluginWithStoreAndLanguagePrefixRouterEnhancerTest extends Unit
         ]);
     }
 
-    /**
-     * @return void
-     */
     public function testMatchReturnsParameterWithStoreAndLanguage(): void
     {
         $routerPlugin = new YvesRouterPlugin();
@@ -75,9 +69,6 @@ class YvesRouterPluginWithStoreAndLanguagePrefixRouterEnhancerTest extends Unit
         $this->assertSame('DE', $parameters['store']);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateReturnsUrlWithStoreAndLanguageWhenStoreAndLanguageAreInContextParameter(): void
     {
         $routerPlugin = new YvesRouterPlugin();
@@ -95,9 +86,6 @@ class YvesRouterPluginWithStoreAndLanguagePrefixRouterEnhancerTest extends Unit
         $this->assertSame('/DE/de/foo', $url);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateReturnsUrlWithoutStoreAndLanguageWhenStoreAndLanguageAreNotInContextParameter(): void
     {
         $this->tester->mockEnvironmentConfig(RouterConstants::IS_STORE_ROUTING_ENABLED, false);
@@ -111,9 +99,6 @@ class YvesRouterPluginWithStoreAndLanguagePrefixRouterEnhancerTest extends Unit
         $this->assertSame('/foo', $url);
     }
 
-    /**
-     * @return void
-     */
     public function testGenerateReturnsUrlWithoutStoreAndLanguageWhenStoreAndLanguageAreNotInContextParameterWithStoreRoutingEnabled(): void
     {
         $this->tester->mockEnvironmentConfig(RouterConstants::IS_STORE_ROUTING_ENABLED, true);

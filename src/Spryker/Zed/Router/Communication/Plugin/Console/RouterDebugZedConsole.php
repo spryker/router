@@ -48,9 +48,6 @@ class RouterDebugZedConsole extends Console
      */
     protected const OPTION_SHOW_CONTROLLERS_SHORT = 'c';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this
@@ -109,12 +106,6 @@ class RouterDebugZedConsole extends Console
         return static::CODE_SUCCESS;
     }
 
-    /**
-     * @param string $name
-     * @param \Symfony\Component\Routing\RouteCollection $routes
-     *
-     * @return array
-     */
     private function findRouteNameContaining(string $name, RouteCollection $routes): array
     {
         $foundRoutesNames = [];

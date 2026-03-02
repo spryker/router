@@ -58,12 +58,6 @@ class RouterLocaleEventDispatcherPlugin extends AbstractPlugin implements EventD
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Spryker\Shared\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Shared\EventDispatcher\EventDispatcherInterface
-     */
     protected function addListeners(EventDispatcherInterface $eventDispatcher, ContainerInterface $container): EventDispatcherInterface
     {
         $eventDispatcher = $this->addRequestKernelEventListener($eventDispatcher, $container);
@@ -72,12 +66,6 @@ class RouterLocaleEventDispatcherPlugin extends AbstractPlugin implements EventD
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Spryker\Shared\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Shared\EventDispatcher\EventDispatcherInterface
-     */
     protected function addRequestKernelEventListener(EventDispatcherInterface $eventDispatcher, ContainerInterface $container): EventDispatcherInterface
     {
         $eventDispatcher->addListener(
@@ -92,12 +80,6 @@ class RouterLocaleEventDispatcherPlugin extends AbstractPlugin implements EventD
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Spryker\Shared\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Shared\EventDispatcher\EventDispatcherInterface
-     */
     protected function addFinishRequestKernelEventListener(EventDispatcherInterface $eventDispatcher, ContainerInterface $container): EventDispatcherInterface
     {
         $eventDispatcher->addListener(
@@ -115,12 +97,6 @@ class RouterLocaleEventDispatcherPlugin extends AbstractPlugin implements EventD
         return $eventDispatcher;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\Routing\RequestContextAwareInterface $router
-     *
-     * @return \Symfony\Component\Routing\RequestContextAwareInterface
-     */
     protected function setRouterContext(Request $request, RequestContextAwareInterface $router): RequestContextAwareInterface
     {
         $router->getContext()->setParameter('_locale', $request->getLocale());
@@ -128,21 +104,11 @@ class RouterLocaleEventDispatcherPlugin extends AbstractPlugin implements EventD
         return $router;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Symfony\Component\Routing\RequestContextAwareInterface
-     */
     protected function getUrlMatcher(ContainerInterface $container): RequestContextAwareInterface
     {
         return $container->get(static::SERVICE_URL_MATCHER);
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Symfony\Component\HttpFoundation\RequestStack
-     */
     protected function getRequestStack(ContainerInterface $container): RequestStack
     {
         return $container->get(static::SERVICE_REQUEST_STACK);

@@ -20,9 +20,6 @@ class RouterDebugBackendGatewayConsole extends AbstractRouterDebugConsole
      */
     protected const NAME = 'router:debug:backend-gateway';
 
-    /**
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
     protected function getRouteCollection(): RouteCollection
     {
         return $this->getFacade()->getBackendGatewayChainRouter()->getRouteCollection();

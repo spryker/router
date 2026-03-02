@@ -21,12 +21,6 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
      */
     protected $currentLanguage;
 
-    /**
-     * @param string $pathinfo
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return string
-     */
     public function beforeMatch(string $pathinfo, RequestContext $requestContext): string
     {
         if ($pathinfo === '/') {
@@ -43,12 +37,6 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $pathinfo;
     }
 
-    /**
-     * @param array $parameters
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return array
-     */
     public function afterMatch(array $parameters, RequestContext $requestContext): array
     {
         if ($this->currentLanguage !== null) {
@@ -58,13 +46,6 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $parameters;
     }
 
-    /**
-     * @param string $url
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     * @param int $referenceType
-     *
-     * @return string
-     */
     public function afterGenerate(string $url, RequestContext $requestContext, int $referenceType): string
     {
         $language = $this->findLanguage($requestContext);
@@ -76,11 +57,6 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $url;
     }
 
-    /**
-     * @param \Symfony\Component\Routing\RequestContext $requestContext
-     *
-     * @return string|null
-     */
     protected function findLanguage(RequestContext $requestContext): ?string
     {
         if ($requestContext->hasParameter('language')) {
@@ -97,13 +73,6 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return null;
     }
 
-    /**
-     * @param string $url
-     * @param string $language
-     * @param int $referenceType
-     *
-     * @return string
-     */
     protected function buildUrlWithLanguage(string $url, string $language, int $referenceType): string
     {
         if ($url === '/') {
@@ -125,11 +94,6 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
         return $url;
     }
 
-    /**
-     * @param string $locale
-     *
-     * @return string
-     */
     protected function getLanguageFromLocale(string $locale): string
     {
         $localeFragments = explode('_', $locale);

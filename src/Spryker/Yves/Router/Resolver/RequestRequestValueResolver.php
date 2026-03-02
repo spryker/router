@@ -13,12 +13,6 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
 class RequestRequestValueResolver implements ArgumentValueResolverInterface
 {
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
-     *
-     * @return bool
-     */
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
         return !$argument->isVariadic() && $request->request->has($argument->getName());
