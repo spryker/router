@@ -8,8 +8,10 @@
 namespace SprykerTest\Yves\Router;
 
 use Codeception\Actor;
+use ReflectionClass;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Storage\StorageConstants;
+use Spryker\Yves\Router\Router\Router;
 
 /**
  * @method void wantToTest($text)
@@ -71,5 +73,12 @@ class RouterYvesTester extends Actor
         $this->setConfig(StorageConstants::STORAGE_REDIS_HOST, Config::get(static::REDIS_HOST));
         $this->setConfig(StorageConstants::STORAGE_REDIS_DATABASE, Config::get(static::REDIS_DATABASE));
         $this->setConfig(StorageConstants::STORAGE_REDIS_PASSWORD, Config::get(static::REDIS_PASSWORD));
+    }
+
+    public function clearStaticGeneratorCache(): void
+    {
+        $reflection = new ReflectionClass(Router::class);
+        $property = $reflection->getProperty('generatorCache');
+        $property->setValue(null, null);
     }
 }

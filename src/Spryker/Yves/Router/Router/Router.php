@@ -18,6 +18,8 @@ use Symfony\Component\Routing\Router as SymfonyRouter;
 
 class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
 {
+    protected static ?UrlGeneratorInterface $generatorCache = null;
+
     /**
      * @var array<\Spryker\Yves\RouterExtension\Dependency\Plugin\RouterEnhancerPluginInterface>
      */
@@ -78,13 +80,13 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
 
     public function getGenerator(): UrlGeneratorInterface
     {
-        if ($this->generator !== null) {
-            return $this->generator;
+        if (static::$generatorCache !== null) {
+            return static::$generatorCache;
         }
 
-        $this->generator = $this->setRouterEnhancerPluginsToGenerator(parent::getGenerator());
+        static::$generatorCache = $this->setRouterEnhancerPluginsToGenerator(parent::getGenerator());
 
-        return $this->generator;
+        return static::$generatorCache;
     }
 
     protected function setRouterEnhancerPluginsToGenerator(UrlGeneratorInterface $generator): UrlGeneratorInterface

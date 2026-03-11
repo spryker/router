@@ -36,6 +36,8 @@ class YvesRouterPluginWithLanguagePrefixRouterEnhancerTest extends Unit
     {
         parent::setUp();
 
+        $this->tester->clearStaticGeneratorCache();
+
         $this->tester->mockEnvironmentConfig(RouterConstants::YVES_IS_CACHE_ENABLED, false);
 
         $this->tester->mockFactoryMethod('getRouteProviderPlugins', [

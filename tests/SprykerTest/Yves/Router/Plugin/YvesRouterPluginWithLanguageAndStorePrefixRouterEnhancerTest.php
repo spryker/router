@@ -38,6 +38,8 @@ class YvesRouterPluginWithLanguageAndStorePrefixRouterEnhancerTest extends Unit
     {
         parent::setUp();
 
+        $this->tester->clearStaticGeneratorCache();
+
         $this->tester->setupStorageRedisConfig();
         $this->tester->mockEnvironmentConfig(RouterConstants::YVES_IS_CACHE_ENABLED, false);
 
