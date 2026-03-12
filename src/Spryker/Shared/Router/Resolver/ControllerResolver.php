@@ -17,6 +17,16 @@ use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 class ControllerResolver implements ControllerResolverInterface
 {
     /**
+     * @var non-empty-string
+     */
+    protected const string DOUBLE_COLON_DELIMITER = '::';
+
+    /**
+     * @var non-empty-string
+     */
+    protected const string SINGLE_COLON_DELIMITER = ':';
+
+    /**
      * @var \Spryker\Service\Container\ContainerInterface
      */
     protected $container;
@@ -57,7 +67,7 @@ class ControllerResolver implements ControllerResolverInterface
      */
     protected function getControllerFromString(Request $request, string $controller)
     {
-        if (strpos($controller, ':') === false && strpos($controller, '.') === false) {
+        if (!str_contains($controller, static::SINGLE_COLON_DELIMITER) && !str_contains($controller, '.')) {
             return false;
         }
 
@@ -73,15 +83,23 @@ class ControllerResolver implements ControllerResolverInterface
             return $controllerInstance;
         }
 
-        [$controllerServiceIdentifier, $actionName] = explode(':', $controller);
+        // Symfony profiler controllers use "::" delimiter, e.g. "web_profiler.controller.profiler::searchBarAction"
+        if (str_contains($controller, static::DOUBLE_COLON_DELIMITER)) {
+            [$controllerServiceIdentifier, $actionName] = explode(static::DOUBLE_COLON_DELIMITER, $controller);
+
+            return $this->resolveControllerCallable(
+                $this->container->get($controllerServiceIdentifier),
+                $actionName,
+            );
+        }
+
+        [$controllerServiceIdentifier, $actionName] = explode(static::SINGLE_COLON_DELIMITER, $controller);
 
         if ($this->container->has($controllerServiceIdentifier)) {
-            $controllerClassName = $this->container->get($controllerServiceIdentifier);
-            $controllerInstance = new $controllerClassName();
-            $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
-
-            /** @phpstan-var callable */
-            return [$controllerInstance, $actionName];
+            return $this->resolveControllerCallable(
+                new ($this->container->get($controllerServiceIdentifier))(),
+                $actionName,
+            );
         }
 
         if (!$this->container->has('container')) {
@@ -169,6 +187,14 @@ class ControllerResolver implements ControllerResolverInterface
         }
 
         throw new InvalidArgumentException(sprintf('Controller "%s" for URI "%s" is not callable.', get_class($controller), $request->getPathInfo()));
+    }
+
+    protected function resolveControllerCallable(object $controllerInstance, string $actionName): callable
+    {
+        $controllerInstance = $this->injectContainerAndInitialize($controllerInstance);
+
+        /** @phpstan-var callable */
+        return [$controllerInstance, $actionName];
     }
 
     /**
