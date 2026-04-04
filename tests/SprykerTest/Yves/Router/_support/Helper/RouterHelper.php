@@ -9,12 +9,14 @@ namespace SprykerTest\Yves\Router\Helper;
 
 use Codeception\Module;
 use Codeception\TestInterface;
+use ReflectionClass;
 use Spryker\Service\Container\ContainerInterface;
 use Spryker\Yves\Router\Loader\ClosureLoader;
 use Spryker\Yves\Router\Plugin\Application\RouterApplicationPlugin;
 use Spryker\Yves\Router\Route\Route;
 use Spryker\Yves\Router\Route\RouteCollection;
 use Spryker\Yves\Router\Router\ChainRouter;
+use Spryker\Yves\Router\Router\Router as SprykerRouter;
 use SprykerTest\Service\Container\Helper\ContainerHelperTrait;
 use SprykerTest\Yves\Application\Helper\ApplicationHelperTrait;
 use Symfony\Component\Routing\Router;
@@ -104,5 +106,14 @@ class RouterHelper extends Module
     public function _after(TestInterface $test): void
     {
         $this->routeCollection = null;
+        $this->resetGeneratorCache();
+    }
+
+    protected function resetGeneratorCache(): void
+    {
+        $reflection = new ReflectionClass(SprykerRouter::class);
+        $property = $reflection->getProperty('generatorCache');
+        $property->setAccessible(true);
+        $property->setValue(null, null);
     }
 }
