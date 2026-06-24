@@ -21,6 +21,8 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 class RouterApplicationPlugin extends AbstractPlugin implements ApplicationPluginInterface
 {
     /**
+     * @api
+     *
      * @see \Spryker\Shared\Application\Application::SERVICE_ROUTER
      *
      * @var string
@@ -28,11 +30,15 @@ class RouterApplicationPlugin extends AbstractPlugin implements ApplicationPlugi
     public const SERVICE_ROUTER = 'routers';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const SERVICE_CONTROLLER_RESOLVER = 'controller-resolver';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const SERVICE_ARGUMENT_RESOLVER = 'argument-resolver';

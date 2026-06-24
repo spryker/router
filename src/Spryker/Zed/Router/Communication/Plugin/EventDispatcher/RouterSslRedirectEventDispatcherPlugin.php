@@ -26,6 +26,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class RouterSslRedirectEventDispatcherPlugin extends AbstractPlugin implements EventDispatcherPluginInterface
 {
     /**
+     * @api
+     *
      * @deprecated Will be removed without replacement.
      *
      * @see \Spryker\Zed\Application\Communication\Plugin\ServiceProvider\SslServiceProvider::BC_FEATURE_FLAG_SSL_SERVICE_PROVIDER
