@@ -113,7 +113,6 @@ class RouterHelper extends Module
     {
         $reflection = new ReflectionClass(SprykerRouter::class);
         $property = $reflection->getProperty('generatorCache');
-        $property->setAccessible(true);
         $property->setValue(null, null);
     }
 }
