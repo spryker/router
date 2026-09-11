@@ -71,7 +71,7 @@ class RouterFactory extends AbstractFactory
     {
         return new RouterResource(
             $this->createRouteCollection(),
-            $this->getRouteProviderPlugins(),
+            fn (): array => $this->getRouteProviderPlugins(),
         );
     }
 

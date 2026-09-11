@@ -7,33 +7,27 @@
 
 namespace Spryker\Yves\Router\RouterResource;
 
+use Closure;
 use Spryker\Yves\Router\Route\RouteCollection;
 
 class RouterResource implements ResourceInterface
 {
-    /**
-     * @var \Spryker\Yves\Router\Route\RouteCollection
-     */
-    protected $routeCollection;
+    protected RouteCollection $routeCollection;
 
-    /**
-     * @var array<\Spryker\Yves\RouterExtension\Dependency\Plugin\RouteProviderPluginInterface>
-     */
-    protected $routeProvider = [];
+    protected Closure $routeProviderLoader;
 
-    /**
-     * @param \Spryker\Yves\Router\Route\RouteCollection $routeCollection
-     * @param array<\Spryker\Yves\RouterExtension\Dependency\Plugin\RouteProviderPluginInterface> $routeProvider
-     */
-    public function __construct(RouteCollection $routeCollection, array $routeProvider)
+    public function __construct(RouteCollection $routeCollection, Closure $routeProviderLoader)
     {
         $this->routeCollection = $routeCollection;
-        $this->routeProvider = $routeProvider;
+        $this->routeProviderLoader = $routeProviderLoader;
     }
 
     public function __invoke(): RouteCollection
     {
-        foreach ($this->routeProvider as $routeProviderPlugin) {
+        /** @var array<\Spryker\Yves\RouterExtension\Dependency\Plugin\RouteProviderPluginInterface> $routeProviderPlugins */
+        $routeProviderPlugins = ($this->routeProviderLoader)();
+
+        foreach ($routeProviderPlugins as $routeProviderPlugin) {
             $this->routeCollection = $routeProviderPlugin->addRoutes($this->routeCollection);
         }
 
