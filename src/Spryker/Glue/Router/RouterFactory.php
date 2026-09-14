@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolve
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
-use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface;
 
@@ -56,7 +56,7 @@ class RouterFactory extends AbstractFactory
     }
 
     /**
-     * @return array<\Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface>
+     * @return array<\Symfony\Component\HttpKernel\Controller\ValueResolverInterface>
      */
     public function getArgumentValueResolvers(): array
     {
@@ -70,32 +70,32 @@ class RouterFactory extends AbstractFactory
         ];
     }
 
-    public function createRequestAttributeValueResolver(): ArgumentValueResolverInterface
+    public function createRequestAttributeValueResolver(): ValueResolverInterface
     {
         return new RequestAttributeValueResolver();
     }
 
-    public function createRequestRequestValueResolver(): ArgumentValueResolverInterface
+    public function createRequestRequestValueResolver(): ValueResolverInterface
     {
         return new RequestRequestValueResolver();
     }
 
-    public function createRequestValueResolver(): ArgumentValueResolverInterface
+    public function createRequestValueResolver(): ValueResolverInterface
     {
         return new RequestValueResolver();
     }
 
-    public function createSessionValueResolver(): ArgumentValueResolverInterface
+    public function createSessionValueResolver(): ValueResolverInterface
     {
         return new SessionValueResolver();
     }
 
-    public function createDefaultValueResolver(): ArgumentValueResolverInterface
+    public function createDefaultValueResolver(): ValueResolverInterface
     {
         return new DefaultValueResolver();
     }
 
-    public function createVariadicValueResolver(): ArgumentValueResolverInterface
+    public function createVariadicValueResolver(): ValueResolverInterface
     {
         return new VariadicValueResolver();
     }

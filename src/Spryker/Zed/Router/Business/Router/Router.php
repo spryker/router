@@ -78,7 +78,9 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
 
     public function getMatcher(): UrlMatcherInterface|RequestMatcherInterface
     {
-        if ($this->matcher !== null) {
+        // $this->matcher is an uninitialized typed property until first accessed; `!== null` would throw.
+        // phpcs:ignore Spryker.ControlStructures.DisallowCloakingCheck.InvalidIsset
+        if (isset($this->matcher)) {
             return $this->matcher;
         }
 
@@ -158,7 +160,9 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
 
     public function getGenerator(): UrlGeneratorInterface
     {
-        if ($this->generator !== null) {
+        // $this->generator is an uninitialized typed property until first accessed; `!== null` would throw.
+        // phpcs:ignore Spryker.ControlStructures.DisallowCloakingCheck.InvalidIsset
+        if (isset($this->generator)) {
             return $this->generator;
         }
 
@@ -169,10 +173,11 @@ class Router extends SymfonyRouter implements RouterInterface, WarmableInterface
 
     /**
      * @param string $cacheDir
+     * @param string|null $buildDir
      *
      * @return array<string>
      */
-    public function warmUp(string $cacheDir): array
+    public function warmUp(string $cacheDir, ?string $buildDir = null): array
     {
         $this->getGenerator();
         $this->getMatcher();

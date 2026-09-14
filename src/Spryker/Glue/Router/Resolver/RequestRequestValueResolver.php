@@ -8,24 +8,20 @@
 namespace Spryker\Glue\Router\Resolver;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
+use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
-class RequestRequestValueResolver implements ArgumentValueResolverInterface
+class RequestRequestValueResolver implements ValueResolverInterface
 {
-    public function supports(Request $request, ArgumentMetadata $argument): bool
-    {
-        return !$argument->isVariadic() && $request->request->has($argument->getName());
-    }
-
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata $argument
-     *
      * @return \Generator<array|string|int|bool|float|null>
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
+        if ($argument->isVariadic() || !$request->request->has($argument->getName())) {
+            return;
+        }
+
         yield $request->request->get($argument->getName());
     }
 }
