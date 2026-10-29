@@ -59,15 +59,15 @@ class LanguagePrefixRouterEnhancerPlugin extends AbstractRouterEnhancerPlugin
 
     protected function findLanguage(RequestContext $requestContext): ?string
     {
-        if ($requestContext->hasParameter('language')) {
-            return $requestContext->getParameter('language');
-        }
-
         if ($requestContext->hasParameter('_locale')) {
             $locale = $requestContext->getParameter('_locale');
             $language = $this->getLanguageFromLocale($locale);
 
             return $language;
+        }
+
+        if ($requestContext->hasParameter('language')) {
+            return $requestContext->getParameter('language');
         }
 
         return null;
